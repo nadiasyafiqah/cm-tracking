@@ -34,4 +34,9 @@
     </tr>
   </tbody>
 </table>
+<div class="flex">
+  <div class="float-right">
+    <small>Total 3 assets</small>
+  </div>
+</div>
 </div>

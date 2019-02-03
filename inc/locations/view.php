@@ -21,4 +21,9 @@
     </tr>
   </tbody>
 </table>
+<div class="flex">
+  <div class="float-right">
+    <small>Total 2 locations</small>
+  </div>
+</div>
 </div>
