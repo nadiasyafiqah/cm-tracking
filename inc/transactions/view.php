@@ -9,6 +9,7 @@
       <th scope="col">Brand</th>
       <th scope="col">Model</th>
       <th scope="col">Serial</th>
+      <th scope="col">Location</th>
       <th scope="col">Action</th>
     </tr>
   </thead>
@@ -20,6 +21,7 @@
       <td>HP</td>
       <td>8100 CMT</td>
       <td>SGH78356</td>
+      <td>Johor | KK Batu Pahat</td>
       <td><a href="$">Edit</a></td>
     </tr>
     <tr>
@@ -29,6 +31,7 @@
       <td>HP</td>
       <td>8100 CMT</td>
       <td>SGH78356</td>
+      <td>Melaka | Politeknik Melaka</td>
       <td><a href="$">Edit</a></td>
     </tr>
     <tr>
@@ -38,8 +41,14 @@
       <td>Lenovo</td>
       <td>T440</td>
       <td>LN873411100</td>
+      <td>HQ | Prodata</td>
       <td><a href="$">Edit</a></td>
     </tr>
   </tbody>
 </table>
+<div class="flex">
+  <div class="float-right">
+    <small>Total 3 transactions</small>
+  </div>
+</div>
 </div>
