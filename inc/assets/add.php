@@ -3,11 +3,11 @@
   <div class="form-group row">
     <label class="col-sm-2 col-form-label" for="brand">Brand</label>
     <div class="col-sm-10">
-    <select class="form-control" name="brand" id="">
-      <option>HP</option>
-      <option>Lenovo</option>
-      <option>Fetched from database or prebuilt</option>
-    </select>
+      <select class="form-control" name="brand" id="">
+        <option>HP</option>
+        <option>Lenovo</option>
+        <option>Fetched from database or prebuilt</option>
+      </select>
     </div>
   </div>
   <div class="form-group row">
