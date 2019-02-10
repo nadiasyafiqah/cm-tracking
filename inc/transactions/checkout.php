@@ -1,4 +1,4 @@
-<h1>Check-out Asset</h1>
+<h2>Asset Check-out</h2>
 <form class="" action="" method="post">
   <div class="form-group row">
     <label class="col-sm-2 col-form-label" for="date">Date</label>
