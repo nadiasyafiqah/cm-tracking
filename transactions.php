@@ -6,12 +6,20 @@ include(LAYOUT_DIR.'header.php');
  
 if (isset(($_GET['action']))) {
   $action = $_GET['action'];
-  if ($action == 'add') {
-    include(INCLUDE_DIR.'transactions/add.php');
+  switch ($action) {
+    case 'checkin':
+      include(INCLUDE_DIR.'transactions/checkin.php');
+      break;
+    case 'checkout':
+      include(INCLUDE_DIR.'transactions/checkout.php');
+      break;
+    case 'transfer':
+      include(INCLUDE_DIR.'transactions/transfer.php');
+      break;
   }
 } else {
   include(INCLUDE_DIR.'transactions/view.php');
 }
 
-include(LAYOUT_DIR.'footer.php'); 
+include(LAYOUT_DIR.'footer.php');
 ?>

@@ -14,8 +14,10 @@
       Transactions
       </a>
       <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+        <a class="dropdown-item" href="transactions.php?action=checkin">Check-in Asset</a>
+        <a class="dropdown-item" href="transactions.php?action=checkout">Check-out Asset</a>
+        <a class="dropdown-item" href="transactions.php?action=transfer">Transfer Asset</a>
         <a class="dropdown-item" href="transactions.php">View Transactions</a>
-        <a class="dropdown-item" href="transactions.php?action=add">Add Transaction</a>
       </div>
       </li>
       <li class="nav-item dropdown">

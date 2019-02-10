@@ -1,18 +1,9 @@
-<h1>Add New Transaction</h1>
+<h1>Check-in Asset</h1>
 <form class="" action="" method="post">
   <div class="form-group row">
     <label class="col-sm-2 col-form-label" for="date">Date</label>
     <div class="col-sm-10">
       <input type="date" class="form-control" name="date">
-    </div>
-  </div>
-  <div class="form-group row">
-    <label class="col-sm-2 col-form-label" for="type">Transaction Type</label>
-    <div class="col-sm-10">
-    <select class="form-control" name="type" id="">
-      <option>Check-in</option>
-      <option>Check-out</option>
-    </select>
     </div>
   </div>
   <div class="form-group row">
@@ -26,12 +17,22 @@
     </div>
   </div>
   <div class="form-group row">
-    <label class="col-sm-2 col-form-label" for="location">Location</label>
+    <label class="col-sm-2 col-form-label" for="location">Source Location</label>
     <div class="col-sm-10">
       <select class="form-control" name="location" id="">
         <option>Johor | KK Batu Pahat</option>
         <option>Melaka | Politeknik Melaka</option>
         <option>State | Institute Name</option>
+      </select>
+    </div>
+  </div>
+  <div class="form-group row">
+    <label class="col-sm-2 col-form-label" for="location">Target Store</label>
+    <div class="col-sm-10">
+      <select class="form-control" name="location" id="">
+        <option>Baracho UTHM</option>
+        <option>Prodata Pasir Gudang</option>
+        <option>Baracho HQ</option>
       </select>
     </div>
   </div>
