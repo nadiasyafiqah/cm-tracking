@@ -9,7 +9,9 @@
         <th scope="col">Brand</th>
         <th scope="col">Model</th>
         <th scope="col">Serial</th>
+        <th scope="col"></th>
         <th scope="col">Flow</th>
+        <th scope="col"></th>
         <th scope="col">Action</th>
       </tr>
     </thead>
@@ -21,7 +23,7 @@
         <td>HP</td>
         <td>8100 CMT</td>
         <td>SGH78356</td>
-        <td>Johor | KK Batu Pahat -> Baracho Muar</td>
+        <td>Johor | KK Batu Pahat</td><td>-></td><td>Baracho Muar</td>
         <td><a href="$">Edit</a></td>
       </tr>
       <tr>
@@ -31,7 +33,7 @@
         <td>HP</td>
         <td>8100 CMT</td>
         <td>SGH78356</td>
-        <td>Baracho HQ -> Melaka | Politeknik Melaka</td>
+        <td>Baracho HQ</td><td>-></td><td>Melaka | Politeknik Melaka</td>
         <td><a href="$">Edit</a></td>
       </tr>
       <tr>
@@ -41,7 +43,7 @@
         <td>Lenovo</td>
         <td>T440</td>
         <td>LN873411100</td>
-        <td>Prodata Pasir Gudang -> Baracho HQ</td>
+        <td>Prodata Pasir Gudang</td><td>-></td><td>Baracho HQ</td>
         <td><a href="$">Edit</a></td>
       </tr>
     </tbody>
