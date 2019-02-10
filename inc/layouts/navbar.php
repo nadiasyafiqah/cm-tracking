@@ -14,9 +14,9 @@
       Transactions
       </a>
       <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-        <a class="dropdown-item" href="transactions.php?action=checkin">Check-in Asset</a>
-        <a class="dropdown-item" href="transactions.php?action=checkout">Check-out Asset</a>
-        <a class="dropdown-item" href="transactions.php?action=transfer">Transfer Asset</a>
+        <a class="dropdown-item" href="transactions.php?action=checkin">Asset Check-in</a>
+        <a class="dropdown-item" href="transactions.php?action=checkout">Asset Check-out</a>
+        <a class="dropdown-item" href="transactions.php?action=transfer">Asset Transfer</a>
         <a class="dropdown-item" href="transactions.php">View Transactions</a>
       </div>
       </li>

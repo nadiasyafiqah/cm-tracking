@@ -1,4 +1,4 @@
-<h1>Transfer Asset</h1>
+<h2>Asset Transfer</h2>
 <small><i>Use this form to transfer asset between Stores</i></small>
 <form class="" action="" method="post">
   <div class="form-group row">
