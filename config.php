@@ -14,6 +14,7 @@ if (!$connection) {
 //Dir setting
 define('ROOT', __DIR__.'/');
 define('INCLUDE_DIR', __DIR__.'/inc/');
+define('BT_INCLUDE_DIR', __DIR__.'/buffertrack/inc/');
 define('BT_LAYOUT_DIR', __DIR__.'/buffertrack/inc/layouts/');
-define('CLASS_DIR', __DIR__.'/inc/class/');
+define('BT_CLASS_DIR', __DIR__.'/buffertrack/inc/class/');
 ?>
