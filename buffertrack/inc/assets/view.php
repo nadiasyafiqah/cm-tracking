@@ -3,7 +3,7 @@
 <table class="table">
   <thead>
     <tr>
-      <th scope="col">ID</th>
+      <th scope="col">#</th>
       <th scope="col">Brand</th>
       <th scope="col">Model</th>
       <th scope="col">Serial</th>
@@ -11,32 +11,40 @@
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <th>1</th>
-      <td>HP</td>
-      <td>8100 CMT</td>
-      <td>SGH78356</td>
-      <td><a href="$">Edit</a></td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>HP</td>
-      <td>7900 CMT</td>
-      <td>SGH765431</td>
-      <td><a href="$">Edit</a></td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>Lenovo</td>
-      <td>T440</td>
-      <td>LN873411100</td>
-      <td><a href="$">Edit</a></td>
-    </tr>
+    <?php
+      $sql = 'SELECT * FROM asset';
+      $sql = mysqli_query($connection, $sql);
+      $nmbr = 1;
+      while ($row = mysqli_fetch_array($sql)) {
+        $assetID = $row['assetID'];
+        $assetBrand = $row['assetBrand'];
+        $assetModel = $row['assetModel'];
+        $assetSerial = $row['assetSerial'];
+        echo "<tr>";
+        echo "<th>$nmbr</th>";
+        echo "<td>$assetBrand</td>";
+        echo "<td>$assetModel</td>";
+        echo "<td>$assetSerial</td>";
+        echo "<td><a href='assets.php?action=edit&asset=$assetID'>Edit</a></td>";
+        echo "</tr>";
+        $nmbr++;
+      }
+    ?>
+    
   </tbody>
 </table>
 <div class="flex">
   <div class="float-right">
-    <small>Total 3 assets</small>
+    <?php
+      // for counting asset total
+      $sql = 'SELECT COUNT(*) FROM asset';
+      $sql = mysqli_query($connection, $sql);
+      while ($row = mysqli_fetch_assoc($sql)) {
+        $totalAsset = $row['COUNT(*)'];
+        echo "<small>Total $totalAsset assets found</small>";
+      }
+    ?>
+    
   </div>
 </div>
 </div>
