@@ -44,7 +44,6 @@
         echo "<small>Total $totalAsset assets found</small>";
       }
     ?>
-    
   </div>
 </div>
 </div>

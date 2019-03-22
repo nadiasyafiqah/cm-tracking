@@ -22,8 +22,8 @@
     $sql .= "WHERE assetID = {$assetID}";
     $sql = mysqli_query($connection, $sql);
     if ($sql) {
-      echo 'Data Submitted';
-      header("Location: assets.php");
+      echo "Data Submitted. Redirecting..";
+      echo "<script>window.setTimeout(function() {window.location = 'assets.php'; }, 2000);</script>";
     } else {
       die;
     }
