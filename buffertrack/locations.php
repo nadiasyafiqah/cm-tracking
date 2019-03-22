@@ -8,6 +8,8 @@ if (isset(($_GET['action']))) {
   $action = $_GET['action'];
   if ($action == 'add') {
     include(BT_INCLUDE_DIR.'locations/add.php');
+  } elseif ($action == 'edit') {
+    include(BT_INCLUDE_DIR.'locations/edit.php');
   }
 } else {
   include(BT_INCLUDE_DIR.'locations/view.php');
