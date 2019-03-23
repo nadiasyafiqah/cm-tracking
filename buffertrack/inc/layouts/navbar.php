@@ -9,10 +9,14 @@
       <li class="nav-item">
         <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
       </li>
-      <li class="nav-item">
-      <a class="nav-link" href="transit.php" id="navbarDropdown" role="button" aria-haspopup="true" aria-expanded="false">
+      <li class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle" href="transit.php" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
       Asset Transit
       </a>
+      <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+      <a class="dropdown-item" href="transit.php?action=add">New Transit</a>
+        <a class="dropdown-item" href="transit.php">Transit Log</a>
+      </div>
       </li>
       <li class="nav-item dropdown">
       <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -44,8 +48,8 @@
     <div>
       <form class="form-inline" action="search.php" method="post">
         <div class="form-group">
-          <label for="search"></label>
-          <input type="text" name="search" id="" class="form-control" placeholder="Search Serial" aria-describedby="helpId">
+          <label for="serialSearchInput"></label>
+          <input type="text" name="serialSearchInput" id="" class="form-control" placeholder="Search Serial" aria-describedby="helpId">
         </div>
       </form>
     </div>
