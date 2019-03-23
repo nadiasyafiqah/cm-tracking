@@ -17,4 +17,5 @@ define('INCLUDE_DIR', __DIR__.'/inc/');
 define('BT_INCLUDE_DIR', __DIR__.'/buffertrack/inc/');
 define('BT_LAYOUT_DIR', __DIR__.'/buffertrack/inc/layouts/');
 define('BT_CLASS_DIR', __DIR__.'/buffertrack/inc/class/');
+include(BT_INCLUDE_DIR.'functions.php');
 ?>
