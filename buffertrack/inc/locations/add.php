@@ -10,13 +10,7 @@
     $sql = "INSERT INTO location(locationState, locationName, locationTypeID) ";
     $sql .= "VALUES ('{$locationState}', '{$locationName}', '{$locationTypeID}')";
     $sql = mysqli_query($connection, $sql);
-
-    if ($sql) {
-      echo 'Data Submitted';
-      echo "<script>window.setTimeout(function() {window.location = 'locations.php'; }, 2000);</script>";
-    } else {
-      echo 'Failed to submit';
-    }
+    checkSql("locations.php");
   }
 ?>
 

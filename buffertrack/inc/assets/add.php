@@ -9,13 +9,7 @@
     $sql = "INSERT INTO asset(assetBrand, assetModel, assetSerial) ";
     $sql .= "VALUES ('{$assetBrand}', '{$assetModel}', '{$assetSerial}')";
     $sql = mysqli_query($connection, $sql);
-
-    if ($sql) {
-      echo 'Data Submitted. Redirecting...';
-      echo "<script>window.setTimeout(function() {window.location = 'assets.php'; }, 2000);</script>";
-    } else {
-      echo 'Failed to submit';
-    }
+    checkSql("assets.php");
   }
 
 

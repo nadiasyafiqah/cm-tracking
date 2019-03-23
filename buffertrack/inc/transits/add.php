@@ -10,11 +10,7 @@
     $sql = "INSERT INTO log(logDate, assetID, txnTypeID, locationID) ";
     $sql .= "VALUES ('{$logDate}', '{$assetID}', '{$txnTypeID}', '{$locationID}')";
     $sql = mysqli_query($connection, $sql);
-    if (!$sql) {
-      die('query failed' . mysqli_error($connection));
-    } else {
-      echo "success";
-    }
+    checkSql("transit.php");
   }
 ?>
 <form action="" method="post">

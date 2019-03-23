@@ -21,12 +21,7 @@
     $sql = "UPDATE asset SET assetBrand = '{$assetBrand}', assetModel = '{$assetModel}', assetSerial = '{$assetSerial}' ";
     $sql .= "WHERE assetID = {$assetID}";
     $sql = mysqli_query($connection, $sql);
-    if ($sql) {
-      echo "Data Submitted. Redirecting..";
-      echo "<script>window.setTimeout(function() {window.location = 'assets.php'; }, 2000);</script>";
-    } else {
-      die;
-    }
+    checkSql("assets.php");
   }
 ?>
 <form class="" action="" method="post">

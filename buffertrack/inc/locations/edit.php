@@ -23,13 +23,7 @@
     $sql = "UPDATE location SET locationState = '{$locationState}', locationName = '{$locationName}', locationTypeID = '{$locationTypeID}' ";
     $sql .= "WHERE locationID = {$locationID}";
     $sql = mysqli_query($connection, $sql);
-
-    if ($sql) {
-      echo "Data Submitted. Redirecting..";
-      echo "<script>window.setTimeout(function() {window.location = 'locations.php'; }, 2000);</script>";
-    } else {
-      die;
-    }
+    checkSql("locations.php");
   }
 ?>
 
