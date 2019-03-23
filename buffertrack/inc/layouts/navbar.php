@@ -10,8 +10,8 @@
         <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-      <a class="nav-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-      Record Movement
+      <a class="nav-link" href="transit.php" id="navbarDropdown" role="button" aria-haspopup="true" aria-expanded="false">
+      Asset Transit
       </a>
       </li>
       <li class="nav-item dropdown">
