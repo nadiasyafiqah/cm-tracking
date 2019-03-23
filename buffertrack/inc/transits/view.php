@@ -1,14 +1,5 @@
-<?php
-include_once('../config.php');
-$pageTitle = 'Search';
-include(BT_LAYOUT_DIR.'header.php');
-?>
-<?php
-  if (isset($_POST['serialSearchInput'])) {
-    $serialSearchInput = $_POST['serialSearchInput'];
-  }
-?>
-<h1>Search Result</h1>
+<h1>Transit Log</h1>
+<div class="table">
 <table class="table">
   <thead>
     <tr>
@@ -24,7 +15,6 @@ include(BT_LAYOUT_DIR.'header.php');
       $sql .= "JOIN asset ON asset.assetID = log.assetID ";
       $sql .= "JOIN txntype ON txntype.txnID = log.txnTypeID ";
       $sql .= "JOIN location ON location.locationID = log.locationID ";
-      $sql .= "WHERE asset.assetSerial = '$serialSearchInput' ";
       $sql .= "ORDER by log.logDate DESC";
       $sql = mysqli_query($connection, $sql);
       while ($row = mysqli_fetch_array($sql)) {
@@ -45,4 +35,17 @@ include(BT_LAYOUT_DIR.'header.php');
     
   </tbody>
 </table>
-<?php include(BT_LAYOUT_DIR.'footer.php'); ?>
+<div class="flex">
+  <div class="float-right">
+    <?php
+      // for counting asset total
+      $sql = 'SELECT COUNT(*) FROM log';
+      $sql = mysqli_query($connection, $sql);
+      while ($row = mysqli_fetch_assoc($sql)) {
+        $totalLog = $row['COUNT(*)'];
+        echo "<small>Total $totalLog logs found</small>";
+      }
+    ?>
+  </div>
+</div>
+</div>
