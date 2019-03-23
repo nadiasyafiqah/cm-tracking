@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Mar 23, 2019 at 12:23 PM
+-- Generation Time: Mar 23, 2019 at 02:17 PM
 -- Server version: 5.7.24
 -- PHP Version: 7.2.11
 
@@ -112,8 +112,8 @@ CREATE TABLE `log` (
 INSERT INTO `log` (`logID`, `logDate`, `assetID`, `txnTypeID`, `locationID`) VALUES
 (2, '2019-02-22', 2, 1, 2),
 (3, '2019-02-22', 3, 1, 2),
-(4, '2019-02-23', 3, 2, 4),
-(5, '2019-02-24', 3, 3, 1);
+(4, '2019-02-23', 3, 3, 4),
+(5, '2019-02-24', 3, 2, 1);
 
 -- --------------------------------------------------------
 
@@ -143,7 +143,8 @@ INSERT INTO `txntype` (`txnID`, `txnName`) VALUES
 -- Indexes for table `asset`
 --
 ALTER TABLE `asset`
-  ADD PRIMARY KEY (`assetID`);
+  ADD PRIMARY KEY (`assetID`),
+  ADD UNIQUE KEY `assetSerial` (`assetSerial`);
 
 --
 -- Indexes for table `location`
@@ -179,7 +180,7 @@ ALTER TABLE `txntype`
 -- AUTO_INCREMENT for table `asset`
 --
 ALTER TABLE `asset`
-  MODIFY `assetID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `assetID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `location`

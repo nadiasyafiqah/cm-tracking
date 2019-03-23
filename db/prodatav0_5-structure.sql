@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Mar 23, 2019 at 12:25 PM
+-- Generation Time: Mar 23, 2019 at 02:15 PM
 -- Server version: 5.7.24
 -- PHP Version: 7.2.11
 
@@ -92,7 +92,8 @@ CREATE TABLE `txntype` (
 -- Indexes for table `asset`
 --
 ALTER TABLE `asset`
-  ADD PRIMARY KEY (`assetID`);
+  ADD PRIMARY KEY (`assetID`),
+  ADD UNIQUE KEY `assetSerial` (`assetSerial`);
 
 --
 -- Indexes for table `location`
