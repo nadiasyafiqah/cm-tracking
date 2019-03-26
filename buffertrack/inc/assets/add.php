@@ -1,15 +1,14 @@
 <h1>Add New Asset</h1>
 <?php
   if (isset($_POST['Submit'])) {
-    $assetBrand = $_POST['assetBrand'];
-    $assetModel = $_POST['assetModel'];
-    $assetSerial = $_POST['assetSerial'];
+    $assetBrand = trimInput($_POST['assetBrand']);
+    $assetModel = trimInput($_POST['assetModel']);
+    $assetSerial = trimInput($_POST['assetSerial']);
     
     //add record into database
     $sql = "INSERT INTO asset(assetBrand, assetModel, assetSerial) ";
     $sql .= "VALUES ('{$assetBrand}', '{$assetModel}', '{$assetSerial}')";
-    $sql = mysqli_query($connection, $sql);
-    checkSql("assets.php");
+    validateForm($_POST,'assets.php');
   }
 
 

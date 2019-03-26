@@ -2,15 +2,14 @@
 
 <?php
   if(isset($_POST['Submit'])){
-    $locationState = $_POST['locationState'];
-    $locationName = $_POST['locationName'];
-    $locationTypeID = $_POST['locationTypeID'];
+    $locationState = trimInput($_POST['locationState']);
+    $locationName = trimInput($_POST['locationName']);
+    $locationTypeID = trimInput($_POST['locationTypeID']);
 
     //add record into database
     $sql = "INSERT INTO location(locationState, locationName, locationTypeID) ";
     $sql .= "VALUES ('{$locationState}', '{$locationName}', '{$locationTypeID}')";
-    $sql = mysqli_query($connection, $sql);
-    checkSql("locations.php");
+    validateForm($_POST, 'locations.php');
   }
 ?>
 
