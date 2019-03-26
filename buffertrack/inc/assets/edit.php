@@ -14,14 +14,13 @@
   }
 
   if (isset($_POST['Submit'])) {
-    $assetBrand = $_POST['assetBrand'];
-    $assetModel = $_POST['assetModel'];
-    $assetSerial = $_POST['assetSerial'];
+    $assetBrand = trimInput($_POST['assetBrand']);
+    $assetModel = trimInput($_POST['assetModel']);
+    $assetSerial = trimInput($_POST['assetSerial']);
 
     $sql = "UPDATE asset SET assetBrand = '{$assetBrand}', assetModel = '{$assetModel}', assetSerial = '{$assetSerial}' ";
     $sql .= "WHERE assetID = {$assetID}";
-    $sql = mysqli_query($connection, $sql);
-    checkSql("assets.php");
+    validateForm($_POST, 'assets.php');
   }
 ?>
 <form class="" action="" method="post">

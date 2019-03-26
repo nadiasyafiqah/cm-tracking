@@ -1,16 +1,15 @@
 <h1>Register Transit</h1>
 <?php
   if (isset($_POST['Submit'])) {
-    echo $logDate = $_POST['logDate'];
-    echo $assetID = $_POST['assetID'];
-    echo $txnTypeID = $_POST['txnTypeID'];
-    echo $locationID = $_POST['locationID'];
+    echo $logDate = trimInput($_POST['logDate']);
+    echo $assetID = trimInput($_POST['assetID']);
+    echo $txnTypeID = trimInput($_POST['txnTypeID']);
+    echo $locationID = trimInput($_POST['locationID']);
 
     //add data into database
     $sql = "INSERT INTO log(logDate, assetID, txnTypeID, locationID) ";
     $sql .= "VALUES ('{$logDate}', '{$assetID}', '{$txnTypeID}', '{$locationID}')";
-    $sql = mysqli_query($connection, $sql);
-    checkSql("transit.php");
+    validateForm($_POST, 'transits.php');
   }
 ?>
 <form action="" method="post">

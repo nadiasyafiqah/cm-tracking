@@ -15,15 +15,14 @@
   }
 
   if(isset($_POST['Submit'])){
-    $locationState = $_POST['locationState'];
-    $locationName = $_POST['locationName'];
-    $locationTypeID = $_POST['locationTypeID'];
+    $locationState = trimInput($_POST['locationState']);
+    $locationName = trimInput($_POST['locationName']);
+    $locationTypeID = trimInput($_POST['locationTypeID']);
 
     //update record into database
     $sql = "UPDATE location SET locationState = '{$locationState}', locationName = '{$locationName}', locationTypeID = '{$locationTypeID}' ";
     $sql .= "WHERE locationID = {$locationID}";
-    $sql = mysqli_query($connection, $sql);
-    checkSql("locations.php");
+    validateForm($_POST, 'locations.php');
   }
 ?>
 
