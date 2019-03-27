@@ -1,10 +1,10 @@
 <h1>Register Transit</h1>
 <?php
   if (isset($_POST['Submit'])) {
-    echo $logDate = trimInput($_POST['logDate']);
-    echo $assetID = trimInput($_POST['assetID']);
-    echo $txnTypeID = trimInput($_POST['txnTypeID']);
-    echo $locationID = trimInput($_POST['locationID']);
+    $logDate = trimInput($_POST['logDate']);
+    $assetID = trimInput($_POST['assetID']);
+    $txnTypeID = trimInput($_POST['txnTypeID']);
+    $locationID = trimInput($_POST['locationID']);
 
     //add data into database
     $sql = "INSERT INTO log(logDate, assetID, txnTypeID, locationID) ";
