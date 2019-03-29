@@ -3,10 +3,11 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Mar 23, 2019 at 02:17 PM
+-- Generation Time: Mar 29, 2019 at 04:54 PM
 -- Server version: 5.7.24
 -- PHP Version: 7.2.11
 
+SET FOREIGN_KEY_CHECKS=0;
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
 START TRANSACTION;
@@ -35,15 +36,6 @@ CREATE TABLE `asset` (
   `assetSerial` varchar(45) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `asset`
---
-
-INSERT INTO `asset` (`assetID`, `assetBrand`, `assetModel`, `assetSerial`) VALUES
-(2, 'Lenovo', 'T440', 'LEN7635381'),
-(3, 'DELL', 'E5440', 'DE25637211'),
-(10, 'HP', '8460P', 'SGH875431');
-
 -- --------------------------------------------------------
 
 --
@@ -56,21 +48,6 @@ CREATE TABLE `location` (
   `locationName` varchar(45) NOT NULL,
   `locationTypeID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `location`
---
-
-INSERT INTO `location` (`locationID`, `locationState`, `locationName`, `locationTypeID`) VALUES
-(1, 'Johor', 'KK Batu Pahat', 1),
-(2, 'Johor', 'BRC Muar', 2),
-(3, 'Johor', 'Poly Metro', 1),
-(4, 'Johor', 'BRC UTHM', 2),
-(5, 'Johor', 'Felda Pasir Gudang', 2),
-(6, 'Melaka', 'Poli Melaka Tengah', 1),
-(7, 'Negeri Sembilan', 'Poli Seremban', 1),
-(8, 'Negeri Sembilan', 'Poli Bemban', 1),
-(9, 'Melaka', 'KK Tengah', 1);
 
 -- --------------------------------------------------------
 
@@ -105,15 +82,17 @@ CREATE TABLE `log` (
   `locationID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+-- --------------------------------------------------------
+
 --
--- Dumping data for table `log`
+-- Table structure for table `remarks`
 --
 
-INSERT INTO `log` (`logID`, `logDate`, `assetID`, `txnTypeID`, `locationID`) VALUES
-(2, '2019-02-22', 2, 1, 2),
-(3, '2019-02-22', 3, 1, 2),
-(4, '2019-02-23', 3, 3, 4),
-(5, '2019-02-24', 3, 2, 1);
+CREATE TABLE `remarks` (
+  `remarkID` int(11) NOT NULL,
+  `logID` int(11) NOT NULL,
+  `remarkContent` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -150,7 +129,8 @@ ALTER TABLE `asset`
 -- Indexes for table `location`
 --
 ALTER TABLE `location`
-  ADD PRIMARY KEY (`locationID`);
+  ADD PRIMARY KEY (`locationID`),
+  ADD KEY `fk_location_locationtype1_idx` (`locationTypeID`);
 
 --
 -- Indexes for table `locationtype`
@@ -164,7 +144,15 @@ ALTER TABLE `locationtype`
 ALTER TABLE `log`
   ADD PRIMARY KEY (`logID`),
   ADD KEY `fk_log_asset_idx` (`assetID`),
-  ADD KEY `fk_log_location1_idx` (`locationID`);
+  ADD KEY `fk_log_location1_idx` (`locationID`),
+  ADD KEY `fk_log_txntype1_idx` (`txnTypeID`);
+
+--
+-- Indexes for table `remarks`
+--
+ALTER TABLE `remarks`
+  ADD PRIMARY KEY (`remarkID`),
+  ADD KEY `fk_remarks_log1_idx` (`logID`);
 
 --
 -- Indexes for table `txntype`
@@ -180,7 +168,7 @@ ALTER TABLE `txntype`
 -- AUTO_INCREMENT for table `asset`
 --
 ALTER TABLE `asset`
-  MODIFY `assetID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `assetID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `location`
@@ -201,15 +189,35 @@ ALTER TABLE `log`
   MODIFY `logID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
+-- AUTO_INCREMENT for table `remarks`
+--
+ALTER TABLE `remarks`
+  MODIFY `remarkID` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `location`
+--
+ALTER TABLE `location`
+  ADD CONSTRAINT `fk_location_locationtype1` FOREIGN KEY (`locationTypeID`) REFERENCES `locationtype` (`locationTypeID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Constraints for table `log`
 --
 ALTER TABLE `log`
   ADD CONSTRAINT `fk_log_asset` FOREIGN KEY (`assetID`) REFERENCES `asset` (`assetID`) ON DELETE CASCADE ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_log_location1` FOREIGN KEY (`locationID`) REFERENCES `location` (`locationID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `fk_log_location1` FOREIGN KEY (`locationID`) REFERENCES `location` (`locationID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_log_txntype1` FOREIGN KEY (`txnTypeID`) REFERENCES `txntype` (`txnID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Constraints for table `remarks`
+--
+ALTER TABLE `remarks`
+  ADD CONSTRAINT `fk_remarks_log1` FOREIGN KEY (`logID`) REFERENCES `log` (`logID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+SET FOREIGN_KEY_CHECKS=1;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
