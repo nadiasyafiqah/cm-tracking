@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Mar 23, 2019 at 02:15 PM
+-- Generation Time: Mar 29, 2019 at 03:58 PM
 -- Server version: 5.7.24
 -- PHP Version: 7.2.11
 
@@ -25,27 +25,17 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `asset`
---
-
-CREATE TABLE `asset` (
-  `assetID` int(11) NOT NULL,
-  `assetBrand` varchar(45) NOT NULL,
-  `assetModel` varchar(45) NOT NULL,
-  `assetSerial` varchar(45) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `location`
 --
 
-CREATE TABLE `location` (
-  `locationID` int(11) NOT NULL,
+DROP TABLE IF EXISTS `location`;
+CREATE TABLE IF NOT EXISTS `location` (
+  `locationID` int(11) NOT NULL AUTO_INCREMENT,
   `locationState` varchar(49) NOT NULL,
   `locationName` varchar(45) NOT NULL,
-  `locationTypeID` int(11) NOT NULL
+  `locationTypeID` int(11) NOT NULL,
+  PRIMARY KEY (`locationID`),
+  KEY `fk_location_locationtype1_idx` (`locationTypeID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -54,9 +44,11 @@ CREATE TABLE `location` (
 -- Table structure for table `locationtype`
 --
 
-CREATE TABLE `locationtype` (
-  `locationTypeID` int(11) NOT NULL,
-  `locationTypeName` varchar(45) DEFAULT NULL
+DROP TABLE IF EXISTS `locationtype`;
+CREATE TABLE IF NOT EXISTS `locationtype` (
+  `locationTypeID` int(11) NOT NULL AUTO_INCREMENT,
+  `locationTypeName` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`locationTypeID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -65,12 +57,32 @@ CREATE TABLE `locationtype` (
 -- Table structure for table `log`
 --
 
-CREATE TABLE `log` (
-  `logID` int(11) NOT NULL,
+DROP TABLE IF EXISTS `log`;
+CREATE TABLE IF NOT EXISTS `log` (
+  `logID` int(11) NOT NULL AUTO_INCREMENT,
   `logDate` date NOT NULL,
   `assetID` int(11) NOT NULL,
   `txnTypeID` int(11) NOT NULL,
-  `locationID` int(11) NOT NULL
+  `locationID` int(11) NOT NULL,
+  PRIMARY KEY (`logID`),
+  KEY `fk_log_asset_idx` (`assetID`),
+  KEY `fk_log_location1_idx` (`locationID`),
+  KEY `fk_log_txntype1_idx` (`txnTypeID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `remarks`
+--
+
+DROP TABLE IF EXISTS `remarks`;
+CREATE TABLE IF NOT EXISTS `remarks` (
+  `remarkID` int(11) NOT NULL AUTO_INCREMENT,
+  `logID` int(11) NOT NULL,
+  `remarkContent` int(11) NOT NULL,
+  PRIMARY KEY (`remarkID`),
+  KEY `fk_remarks_log1_idx` (`logID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -79,86 +91,36 @@ CREATE TABLE `log` (
 -- Table structure for table `txntype`
 --
 
-CREATE TABLE `txntype` (
+DROP TABLE IF EXISTS `txntype`;
+CREATE TABLE IF NOT EXISTS `txntype` (
   `txnID` int(11) NOT NULL,
-  `txnName` varchar(45) DEFAULT NULL
+  `txnName` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`txnID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Indexes for dumped tables
---
-
---
--- Indexes for table `asset`
---
-ALTER TABLE `asset`
-  ADD PRIMARY KEY (`assetID`),
-  ADD UNIQUE KEY `assetSerial` (`assetSerial`);
-
---
--- Indexes for table `location`
---
-ALTER TABLE `location`
-  ADD PRIMARY KEY (`locationID`);
-
---
--- Indexes for table `locationtype`
---
-ALTER TABLE `locationtype`
-  ADD PRIMARY KEY (`locationTypeID`);
-
---
--- Indexes for table `log`
---
-ALTER TABLE `log`
-  ADD PRIMARY KEY (`logID`),
-  ADD KEY `fk_log_asset_idx` (`assetID`),
-  ADD KEY `fk_log_location1_idx` (`locationID`);
-
---
--- Indexes for table `txntype`
---
-ALTER TABLE `txntype`
-  ADD PRIMARY KEY (`txnID`);
-
---
--- AUTO_INCREMENT for dumped tables
---
-
---
--- AUTO_INCREMENT for table `asset`
---
-ALTER TABLE `asset`
-  MODIFY `assetID` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `location`
---
-ALTER TABLE `location`
-  MODIFY `locationID` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `locationtype`
---
-ALTER TABLE `locationtype`
-  MODIFY `locationTypeID` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `log`
---
-ALTER TABLE `log`
-  MODIFY `logID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- Constraints for dumped tables
 --
 
 --
+-- Constraints for table `location`
+--
+ALTER TABLE `location`
+  ADD CONSTRAINT `fk_location_locationtype1` FOREIGN KEY (`locationTypeID`) REFERENCES `locationtype` (`locationTypeID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
 -- Constraints for table `log`
 --
 ALTER TABLE `log`
   ADD CONSTRAINT `fk_log_asset` FOREIGN KEY (`assetID`) REFERENCES `asset` (`assetID`) ON DELETE CASCADE ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_log_location1` FOREIGN KEY (`locationID`) REFERENCES `location` (`locationID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `fk_log_location1` FOREIGN KEY (`locationID`) REFERENCES `location` (`locationID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_log_txntype1` FOREIGN KEY (`txnTypeID`) REFERENCES `txntype` (`txnID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Constraints for table `remarks`
+--
+ALTER TABLE `remarks`
+  ADD CONSTRAINT `fk_remarks_log1` FOREIGN KEY (`logID`) REFERENCES `log` (`logID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
