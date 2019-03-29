@@ -1,15 +1,24 @@
 <h1>Register Transit</h1>
 <?php
   if (isset($_POST['Submit'])) {
-    echo $logDate = trimInput($_POST['logDate']);
-    echo $assetID = trimInput($_POST['assetID']);
-    echo $txnTypeID = trimInput($_POST['txnTypeID']);
-    echo $locationID = trimInput($_POST['locationID']);
+    $logDate = trimInput($_POST['logDate']);
+    $assetID = trimInput($_POST['assetID']);
+    $txnTypeID = trimInput($_POST['txnTypeID']);
+    $locationID = trimInput($_POST['locationID']);
+    $remarkContent = trimInput($_POST['remarkContent']);
 
     //add data into database
-    $sql = "INSERT INTO log(logDate, assetID, txnTypeID, locationID) ";
-    $sql .= "VALUES ('{$logDate}', '{$assetID}', '{$txnTypeID}', '{$locationID}')";
-    validateForm($_POST, 'transits.php');
+    $sql1 = "INSERT INTO log(logDate, assetID, txnTypeID, locationID) ";
+    $sql1 .= "VALUES ('{$logDate}', '{$assetID}', '{$txnTypeID}', '{$locationID}')";
+    $sql2 = "INSERT INTO remarks(logID, remarkContent) ";
+    $sql2 .= "VALUES (LAST_INSERT_ID(), '{$remarkContent}')";
+    $request = array(
+      "logDate" => "$logDate",
+      "assetID" => "$assetID",
+      "txnTypeID" => "$txnTypeID",
+      "locationID" => "$locationID"
+    );
+    validateFormSQLBegin($request, 'transit.php');
   }
 ?>
 <form action="" method="post">
@@ -71,6 +80,12 @@
           }
         ?>
       </select>
+    </div>
+  </div>
+  <div class="form-group row">
+    <label class="col-sm-2 col-form-label" for="remarkContent">Remarks</label>
+    <div class="col-sm-10">
+      <input class="form-control" type="text" name="remarkContent" placeholder="If asset is swapped with faulty asset, please provide source location & ticket number" id="">
     </div>
   </div>
   <input class="btn btn-primary" type="submit" name="Submit" value="Submit">
