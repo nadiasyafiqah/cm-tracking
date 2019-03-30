@@ -1,6 +1,6 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 <div class="jumbotron">
-  <h1 class="display-4 text-center">Welcome to CM Tracking Sysytem</h1>
+  <h1 class="display-4 text-center">Welcome to CM Tracking System</h1>
   <p class="lead text-center">Please select one of the module below to proceed.</p>
   <hr class="my-4">
   <div class="row">
