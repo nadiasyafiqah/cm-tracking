@@ -1,9 +1,9 @@
 <?php
 //Database config
-$db_hostname = '';
+$db_hostname = 'localhost';
 $db_username ='';
 $db_password = '';
-$db_name = '';
+$db_name = 'tracking';
 
 $connection = mysqli_connect($db_hostname, $db_username, $db_password, $db_name);
 
