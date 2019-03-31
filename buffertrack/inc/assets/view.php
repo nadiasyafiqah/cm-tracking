@@ -12,7 +12,7 @@
   </thead>
   <tbody>
     <?php
-      $sql = 'SELECT * FROM asset';
+      $sql = 'SELECT * FROM asset WHERE assetStatus = 1';
       $sql = mysqli_query($connection, $sql);
       $nmbr = 1;
       while ($row = mysqli_fetch_array($sql)) {
@@ -37,7 +37,7 @@
   <div class="float-right">
     <?php
       // for counting asset total
-      $sql = 'SELECT COUNT(*) FROM asset';
+      $sql = 'SELECT COUNT(*) FROM asset WHERE assetStatus =1';
       $sql = mysqli_query($connection, $sql);
       while ($row = mysqli_fetch_assoc($sql)) {
         $totalAsset = $row['COUNT(*)'];
