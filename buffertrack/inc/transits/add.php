@@ -19,6 +19,7 @@
         <?php
           //fetch assets from database
           $sql = "SELECT * FROM asset ";
+          $sql .= "WHERE assetStatus = 1 ";
           $sql .= "ORDER by assetBrand ASC, assetModel ASC, assetSerial ASC";
           $sql = mysqli_query($connection, $sql);
           while ($row = mysqli_fetch_assoc($sql)) {
