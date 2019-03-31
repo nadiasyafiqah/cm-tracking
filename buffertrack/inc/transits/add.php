@@ -1,24 +1,7 @@
 <h1>Register Transit</h1>
 <?php
   if (isset($_POST['Submit'])) {
-    $logDate = trimInput($_POST['logDate']);
-    $assetID = trimInput($_POST['assetID']);
-    $txnTypeID = trimInput($_POST['txnTypeID']);
-    $locationID = trimInput($_POST['locationID']);
-    $remarkContent = trimInput($_POST['remarkContent']);
-
-    //add data into database
-    $sql1 = "INSERT INTO log(logDate, assetID, txnTypeID, locationID) ";
-    $sql1 .= "VALUES ('{$logDate}', '{$assetID}', '{$txnTypeID}', '{$locationID}')";
-    $sql2 = "INSERT INTO remarks(logID, remarkContent) ";
-    $sql2 .= "VALUES (LAST_INSERT_ID(), '{$remarkContent}')";
-    $request = array(
-      "logDate" => "$logDate",
-      "assetID" => "$assetID",
-      "txnTypeID" => "$txnTypeID",
-      "locationID" => "$locationID"
-    );
-    validateFormSQLBegin($request, 'transit.php');
+    validateTransitForm($_POST, 'transit.php');
   }
 ?>
 <form action="" method="post">
