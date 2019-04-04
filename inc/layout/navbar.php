@@ -32,7 +32,12 @@
         </div>
         <ul class="navbar-nav">
           <li class="nav-item">
-            <a class="nav-link" href="profile.php">Hi, Admin</a>
+            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="profile.php">Hi, Admin</a>
+            <div class=" mr-1 dropdown-menu dropdown-menu-right">
+              <a class="dropdown-item" href="">Maintenance</a>
+              <a class="dropdown-item" href="">Profile</a>
+              <a class="dropdown-item" href="">Logout</a>
+            </div>
           </li>
         </ul>
       </div>
