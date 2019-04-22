@@ -185,7 +185,7 @@ class Asset {
     $sql = "SELECT `asset`.`assetID`, `serial`.`serialName` ";
     $sql .= "FROM `asset` ";
     $sql .= "LEFT JOIN `serial` ON `asset`.`serialID` = `serial`.`serialID` ";
-    $sql .= "WHERE (`asset`.`assetID` = $assetID)";
+    $sql .= "WHERE `asset`.`assetID` = {$assetID}";
     $sql = mysqli_query($connection, $sql);
     while ($row = mysqli_fetch_assoc($sql)) {
       $assetSerial = $row['serialName'];
@@ -200,7 +200,7 @@ class Asset {
     $sql .= "LEFT JOIN `asset` ON `asset`.`serialID` = `serial`.`serialID` ";
     $sql .= "LEFT JOIN `brand` ON `asset`.`brandID` = `brand`.`brandID` ";
     $sql .= "LEFT JOIN `model` ON `asset`.`modelID` = `model`.`modelID` ";
-    $sql .= "WHERE `brand`.`brandID` = {$brandID} AND `model`.`modelID` = {$modelID}";
+    $sql .= "WHERE `brand`.`brandID` = {$brandID} AND `model`.`modelID` = {$modelID} AND `asset`.`assetStatusID` = 1";
     $sql = mysqli_query($connection, $sql);
     $num = 1;
     while ($row = mysqli_fetch_assoc($sql)) {
