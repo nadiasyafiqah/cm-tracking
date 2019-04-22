@@ -1,15 +1,14 @@
+<?php include(CLASS_DIR.'/class.asset.php'); ?>
 <h1>Asset List</h1>
 <table class="table table-striped table-hover">
   <thead>
     <tr>
       <th scope="col">#</th>
-      <th scope="col">Brand</th>
-      <th scope="col">Model</th>
-      <th scope="col">Serial</th>
-      <th scope="col">Current Location</th>
+      <th scope="col">Description</th>
+      <th scope="col">Action</th>
     </tr>
   </thead>
   <tbody>
-    <?php fetchAssetList(); ?>
+    <?php Asset::getDistinctAssetBrandAndModel(); ?>
   </tbody>
 </table>

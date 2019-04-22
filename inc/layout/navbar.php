@@ -12,7 +12,7 @@
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" >Asset</a>
             <div class="dropdown-menu">
-              <a class="dropdown-item" href="assets.php?add">Add Asset</a>
+              <a class="dropdown-item" href="assets.php?action=add">Add Asset</a>
               <a class="dropdown-item" href="assets.php">Assets List</a>
             </div>
           </li>
