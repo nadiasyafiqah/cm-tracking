@@ -110,7 +110,7 @@ class DAL {
         if (!$sql) {
           die('Failed. '.mysqli_error($connection));
         }
-      $sql2 = "UPDATE `asset` SET `locationID` = {$checkoutLocation} ";
+      $sql2 = "UPDATE `asset` SET `locationID` = {$checkoutLocation}, `assetStatusID` = 2 ";
       $sql2 .= "WHERE `assetID` = {$assetID}";
       $sql2 = mysqli_query($connection, $sql2);
       if (!$sql2) {
@@ -142,7 +142,7 @@ class DAL {
         die('Failed. '. mysqli_error($connection));
       }
 
-      $sql3 = "UPDATE `asset` SET `locationID` = {$checkoutLocation} ";
+      $sql3 = "UPDATE `asset` SET `locationID` = {$checkoutLocation}, `assetStatusID` = 2 ";
       $sql3 .= "WHERE `assetID` = {$assetID}";
       $sql3 = mysqli_query($connection, $sql3);
       if (!$sql3) {
@@ -165,7 +165,7 @@ class DAL {
         mysqli_rollback($connection);
         die('Failed. '. mysqli_error($connection));
       }
-      $sql2 = "UPDATE `asset` SET `locationID` = {$checkoutLocation} ";
+      $sql2 = "UPDATE `asset` SET `locationID` = {$checkoutLocation}, `assetStatusID` = 2 ";
       $sql2 .= "WHERE `assetID` = {$assetID}";
       $sql2 = mysqli_query($sql3);
       if (!$sql2) {
@@ -209,7 +209,7 @@ class DAL {
           die('Failed. '. mysqli_error($connection));
         }
 
-        $sql4 = "UPDATE `asset` SET `locationID` = {$checkoutLocation} ";
+        $sql4 = "UPDATE `asset` SET `locationID` = {$checkoutLocation}, `assetStatusID` = 2 ";
         $sql4 .= "WHERE `assetID` = {$assetID}";
         $sql4 = mysqli_query($connection, $sql4);
         if (!$sql4) {
@@ -241,7 +241,7 @@ class DAL {
           die('Failed. '. mysqli_error($connection));
         }
 
-        $sql4 = "UPDATE `asset` SET `locationID` = {$checkoutLocation} ";
+        $sql4 = "UPDATE `asset` SET `locationID` = {$checkoutLocation}, `assetStatusID` = 2 ";
         $sql4 .= "WHERE `assetID` = {$assetID}";
         $sql4 = mysqli_query($connection, $sql4);
         if (!$sql4) {
