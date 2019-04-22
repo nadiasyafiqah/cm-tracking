@@ -278,7 +278,12 @@ class DAL {
     $sql .= "FROM `log` ";
     $sql .= "WHERE `log`.`txnTypeID` = 2 AND `log`.`assetID` = {$assetID}";
     $sql = mysqli_query($connection, $sql);
-    if (mysqli_num_rows($sql) == 0 && empty($transferRemarks)) { // if no database result & transferRemarks field is empty
+    if (mysqli_num_rows($sql) > 0) {
+      $assetHasTransferData = true;
+    } else {
+      $assetHasTransferData = false;
+    }
+    if (!$assetHasTransferData && empty($transferRemarks)) { // if no database result & transferRemarks field is empty
       mysqli_begin_transaction($connection);
       $sql1 = "INSERT INTO `log`(`logDate`, `locationID`, `assetID`, `txnTypeID`, `userID`) ";
       $sql1 .= "VALUES ('{$transferDate}', '{$transferLocation}', '{$assetID}', 2, 1)";
@@ -299,7 +304,7 @@ class DAL {
         mysqli_rollback($connection);
         die('Failed. '. mysqli_error($connection));
       }
-    } elseif (mysqli_num_rows($sql) == 0 && !empty($transferRemarks)) { //if no database result & transferRemarks is not empty
+    } elseif (!$assetHasTransferData && !empty($transferRemarks)) { //if no database result & transferRemarks is not empty
       mysqli_begin_transaction($connection);
       $sql1 = "INSERT INTO `log`(`logDate`, `locationID`, `assetID`, `txnTypeID`, `userID`) ";
       $sql1 .= "VALUES ('{$transferDate}', '{$transferLocation}', '{$assetID}', 2, 1)";
@@ -332,10 +337,10 @@ class DAL {
         mysqli_rollback($connection);
         die('Failed. '. mysqli_error($connection));
       }
-    } elseif (mysqli_num_rows($sql) > 0 && empty($transferRemarks)) { //if exists database result & transferRemarks is empty
+    } elseif ($assetHasTransferData && empty($transferRemarks)) { //if exists database result & transferRemarks is empty
       mysqli_begin_transaction($connection);
       $sql1 = "UPDATE `log` SET `logDate` = '{$transferDate}', `locationID` = '{$transferLocation}' ";
-      $sql1 .= "WHERE `log`.`assetID` = {$assetID}";
+      $sql1 .= "WHERE `log`.`assetID` = {$assetID} AND `log`.`txnTypeID` = 2";
       $sql1 = mysqli_query($connection, $sql1);
       if (!$sql1) {
         mysqli_rollback($connection);
