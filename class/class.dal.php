@@ -4,13 +4,17 @@ class DAL {
   public static function Error() {
     global $connection;
     $error = mysqli_error($connection);
+    echo "<div class='alert alert-danger' role='alert'>";
     echo "Failed. ".$error."<br>";
+    echo "</div>";
   }
 
   public static function ErrorNo() {
     global $connection;
-    $error = mysqli_errno($connection);
-    return $error."<br>";
+    $error = mysqli_error($connection);
+    echo "<div class='alert alert-danger' role='alert'>";
+    echo "Failed. ".$error."<br>";
+    echo "</div>";
   }
 
   public static function addAssetWithoutRemarks($request) {
@@ -24,8 +28,10 @@ class DAL {
 
     $requiredField = array("Date"=>"$logDate", "Brand"=>"$brandID", "Model"=>"$modelID", "Serial"=>"$serialName", "Check-in Store"=>"$locationID");
     foreach ($requiredField as $field => $value) {
-      if ($value == '') {
+      if ($value == '') {    
+        echo "<div class='alert alert-warning' role='alert'>";
         echo "{$field} is empty.<br>";
+        echo "</div>";
       }
     }
   
@@ -35,7 +41,9 @@ class DAL {
     if (!$sql1) {
       $error = DAL::ErrorNo();
       if ($error = 1062) {
+        echo "<div class='alert alert-warning' role='alert'>";
         echo "Serial already exist<br>";
+        echo "</div>";
       }
     }
     $serialID = mysqli_insert_id($connection); //get serialID
@@ -43,14 +51,14 @@ class DAL {
     $sql2 .= "VALUES ('{$brandID}', '{$modelID}', '{$locationID}', '{$serialID}', 1)";
     $sql2 = mysqli_query($connection, $sql2);
     if (!$sql2) {
-      echo "Failed. Error ".DAL::ErrorNo();
+      echo DAL::ErrorNo();
     }
     $assetID = mysqli_insert_id($connection); //get assetID
     $sql3 = "INSERT INTO `log`(`logDate`, `locationID`, `assetID`, `txnTypeID`, `userID`) ";
     $sql3.= "VALUES ('{$logDate}', '{$locationID}', '{$assetID}', 1, 1)";
     $sql3 = mysqli_query($connection, $sql3);
     if (!$sql3) {
-      echo "Failed. Error ".DAL::ErrorNo();
+      echo DAL::ErrorNo();
     }
 
     if ($sql1 && $sql2 && $sql3) {
@@ -73,7 +81,7 @@ class DAL {
     $sql1 = "INSERT INTO `serial`(`serialName`) VALUES ('{$serialName}')";
     $sql1 = mysqli_query($connection, $sql1);
     if (!$sql1) {
-      echo "Failed. Error".DAL::ErrorNo();
+      echo DAL::ErrorNo();
     }
 
     $serialID = mysqli_insert_id($connection); //get serialID
