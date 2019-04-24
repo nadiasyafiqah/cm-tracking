@@ -14,6 +14,7 @@
             <div class="dropdown-menu">
               <a class="dropdown-item" href="assets.php?action=add">Add Asset</a>
               <a class="dropdown-item" href="assets.php">Assets List</a>
+              <a class="dropdown-item" href="assets.php?action=archived">Archived List</a>
             </div>
           </li>
           <li class="nav-item dropdown">

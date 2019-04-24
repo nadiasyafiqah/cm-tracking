@@ -17,6 +17,10 @@ if (!isset($_GET['action'])) {
       include(ASSETS_INC.'/details.php');
       break;
 
+    case 'archived':
+      include(ASSETS_INC.'/archived.php');
+      break;
+
     default:
       include(ASSETS_INC.'/lists.php');
       break;

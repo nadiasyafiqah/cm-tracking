@@ -230,5 +230,31 @@ class Asset {
     }
     echo $currentLocation;
   }
+
+  public static function getArchivedAssetList() {
+    global $connection;
+    $sql = "SELECT `asset`.`assetID`, `brand`.`brandName`, `model`.`modelName`, `serial`.`serialName` ";
+    $sql .= "FROM `assetstatus` ";
+    $sql .= "LEFT JOIN `asset` ON `asset`.`assetStatusID` = `assetstatus`.`assetStatusID` ";
+    $sql .= "LEFT JOIN `brand` ON `asset`.`brandID` = `brand`.`brandID` ";
+    $sql .= "LEFT JOIN `model` ON `asset`.`modelID` = `model`.`modelID` ";
+    $sql .= "LEFT JOIN `serial` ON `asset`.`serialID` = `serial`.`serialID` ";
+    $sql .= "WHERE (`assetstatus`.`assetStatusID` = 2) "; 
+    $sql .= "ORDER BY `brand`.`brandName` ASC, `model`.`modelName` ASC, `serial`.`serialName` ASC";
+    $sql = mysqli_query($connection, $sql);
+    while ($row = mysqli_fetch_assoc($sql)) {
+      $assetID = $row['assetID'];
+      $brandName = $row['brandName'];
+      $modelName = $row['modelName'];
+      $serialName = $row['serialName'];
+      $num = 1;
+      echo "<tr>";
+      echo "  <td>{$num}</td>";
+      echo "  <td>{$brandName}&nbsp{$modelName}</td>";
+      echo "  <td><a href='assets.php?action=details&asset={$assetID}'>{$serialName}</a></td>";
+      echo "</tr>";
+      $num++;
+    }
+  }
 }
 ?>
