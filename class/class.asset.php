@@ -242,12 +242,12 @@ class Asset {
     $sql .= "WHERE (`assetstatus`.`assetStatusID` = 2) "; 
     $sql .= "ORDER BY `brand`.`brandName` ASC, `model`.`modelName` ASC, `serial`.`serialName` ASC";
     $sql = mysqli_query($connection, $sql);
+    $num = 1;
     while ($row = mysqli_fetch_assoc($sql)) {
       $assetID = $row['assetID'];
       $brandName = $row['brandName'];
       $modelName = $row['modelName'];
       $serialName = $row['serialName'];
-      $num = 1;
       echo "<tr>";
       echo "  <td>{$num}</td>";
       echo "  <td>{$brandName}&nbsp{$modelName}</td>";
