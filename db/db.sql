@@ -404,7 +404,7 @@ COMMIT;
 START TRANSACTION;
 USE `trackingapp`;
 INSERT INTO `trackingapp`.`assetStatus` (`assetStatusID`, `assetStatusName`) VALUES (1, 'Active');
-INSERT INTO `trackingapp`.`assetStatus` (`assetStatusID`, `assetStatusName`) VALUES (2, 'Archive');
+INSERT INTO `trackingapp`.`assetStatus` (`assetStatusID`, `assetStatusName`) VALUES (2, 'Archived');
 
 COMMIT;
 
