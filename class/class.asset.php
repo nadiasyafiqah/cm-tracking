@@ -121,13 +121,13 @@ class Asset {
   public static function getAssetList() {
     global $connection;
     $sql = "SELECT `asset`.`assetID`, `brand`.`brandName`, `model`.`modelName`, `serial`.`serialName`, `location`.`locationName` ";
-    $sql .= "FROM `assetstatus` ";
-    $sql .= "JOIN `asset` ON `asset`.`assetStatusID` = `assetstatus`.`assetStatusID` ";
+    $sql .= "FROM `assetStatus` ";
+    $sql .= "JOIN `asset` ON `asset`.`assetStatusID` = `assetStatus`.`assetStatusID` ";
     $sql .= "JOIN `brand` ON `asset`.`brandID` = `brand`.`brandID` ";
     $sql .= "JOIN `location` ON `asset`.`locationID` = `location`.`locationID` ";
     $sql .= "JOIN `model` ON `asset`.`modelID` = `model`.`modelID` ";
     $sql .= "JOIN `serial` ON `asset`.`serialID` = `serial`.`serialID` ";
-    $sql .= "WHERE (`assetstatus`.`assetStatusName` = 'Active') ";
+    $sql .= "WHERE (`assetStatus`.`assetStatusName` = 'Active') ";
     $sql .= "ORDER BY `brand`.`brandName` ASC, `model`.`modelName` ASC, `serial`.`serialName` ASC ";
     $sql = mysqli_query($connection, $sql);
     $num = 1;
@@ -234,12 +234,12 @@ class Asset {
   public static function getArchivedAssetList() {
     global $connection;
     $sql = "SELECT `asset`.`assetID`, `brand`.`brandName`, `model`.`modelName`, `serial`.`serialName` ";
-    $sql .= "FROM `assetstatus` ";
-    $sql .= "LEFT JOIN `asset` ON `asset`.`assetStatusID` = `assetstatus`.`assetStatusID` ";
+    $sql .= "FROM `assetStatus` ";
+    $sql .= "LEFT JOIN `asset` ON `asset`.`assetStatusID` = `assetStatus`.`assetStatusID` ";
     $sql .= "LEFT JOIN `brand` ON `asset`.`brandID` = `brand`.`brandID` ";
     $sql .= "LEFT JOIN `model` ON `asset`.`modelID` = `model`.`modelID` ";
     $sql .= "LEFT JOIN `serial` ON `asset`.`serialID` = `serial`.`serialID` ";
-    $sql .= "WHERE (`assetstatus`.`assetStatusID` = 2) "; 
+    $sql .= "WHERE (`assetStatus`.`assetStatusID` = 2) "; 
     $sql .= "ORDER BY `brand`.`brandName` ASC, `model`.`modelName` ASC, `serial`.`serialName` ASC";
     $sql = mysqli_query($connection, $sql);
     $num = 1;
