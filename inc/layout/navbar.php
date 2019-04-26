@@ -25,8 +25,8 @@
             </div>
           </li>
         </ul>
-        <form class="form-inline my-2 my-lg-0" action="search.php">
-          <input class="form-control mr-sm-2" type="text" placeholder="Search Serial" aria-label="Search">
+        <form class="form-inline my-2 my-lg-0" method="post" action="search.php">
+          <input class="form-control mr-sm-2" type="text" placeholder="Search Serial" name="search">
         </form>
         <div>
         <i class="fa fa-user fa-lg" aria-hidden="true"></i>
