@@ -279,5 +279,46 @@ class Asset {
       echo "readonly";
     }
   }
+
+  public static function searchAssetBySerial($searchString) {
+    global $connection;
+    $sql = "SELECT `asset`.`assetID`, `assetStatus`.`assetStatusName`, `serial`.`serialName`, `brand`.`brandName`, `model`.`modelName` ";
+    $sql .= "FROM `serial` ";
+    $sql .= "LEFT JOIN `asset` ON `asset`.`serialID` = `serial`.`serialID` ";
+    $sql .= "LEFT JOIN `assetStatus` ON `asset`.`assetStatusID` = `assetStatus`.`assetStatusID` ";
+    $sql .= "LEFT JOIN `brand` ON `asset`.`brandID` = `brand`.`brandID` ";
+    $sql .= "LEFT JOIN `model` ON `asset`.`modelID` = `model`.`modelID` ";
+    $sql .= "WHERE `serial`.`serialName` LIKE '%{$searchString}%'";
+    $sql = mysqli_query($connection, $sql);
+    if (mysqli_num_rows($sql) > 1) {
+      echo "      <h1>Serial Search Results</h1>";
+      echo "<table class='table table-striped table-hover'>";
+      echo "  <thead>";
+      echo "    <tr>";
+      echo "    </tr>";
+      echo "  </thead>";
+      echo "  <tbody>";
+      while ($row = mysqli_fetch_assoc($sql)) {
+        $assetID = $row['assetID'];
+        $brandName = $row['brandName'];
+        $modelName = $row['modelName'];
+        $serialName = $row['serialName'];
+        
+        echo "    <tr>";
+        echo "      <td>{$brandName}&nbsp{$modelName}&nbsp<a href='assets.php?action=details&asset={$assetID}'>{$serialName}</a></td>";
+        echo "    </tr>";
+      }
+      echo "  </tbody>";
+      echo "</table>";
+      } elseif (mysqli_num_rows($sql) == 1) {
+          while ($row = mysqli_fetch_assoc($sql)) {
+            $assetID = $row['assetID'];
+          }
+        header("Location: assets.php?action=details&asset={$assetID}");
+      } else {
+        echo "<h1>Serial Search Results</h1>";
+        echo "<p>No result</p>";
+      }
+  }
 }
 ?>
