@@ -165,8 +165,16 @@ class Form {
     }
   }
 
-  public static function resetForm($formName) {
-    
+  public static function printDangerMsg($msg) {
+    echo "<div class='alert alert-danger' role='alert'>";
+    echo "{$msg}".'<br>';
+    echo "</div>";
+  }
+
+  public static function printWarningMsg($msg) {
+    echo "<div class='alert alert-warning' role='alert'>";
+    echo "{$msg}".'<br>';
+    echo "</div>";
   }
 }
 ?>

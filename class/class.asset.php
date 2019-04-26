@@ -256,5 +256,28 @@ class Asset {
       $num++;
     }
   }
+
+  public static function isArchived($assetID) {
+    global $connection;
+    $sql = "SELECT `asset`.`assetID`, `assetStatus`.`assetStatusName` ";
+    $sql .= "FROM `asset` ";
+    $sql .= "LEFT JOIN `assetStatus` ON `asset`.`assetStatusID` = `assetStatus`.`assetStatusID` ";
+    $sql .= "WHERE (`asset`.`assetID` = {$assetID})";
+    $sql = mysqli_query($connection, $sql);
+    while ($row = mysqli_fetch_assoc($sql)) {
+      $assetStatus = $row['assetStatusName'];
+    }
+    if ($assetStatus == 'Archived') {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  public static function disableInputOnArchivedAsset($assetID) {
+    if (Asset::isArchived($assetID)) {
+      echo "readonly";
+    }
+  }
 }
 ?>

@@ -6,16 +6,32 @@
     $assetID = $_GET['asset'];
   }
 
+  if (Asset::isArchived($assetID)) {
+    Form::printWarningMsg("Asset is Archived. No update can be made.");
+  }
+
   if (isset($_POST['checkinUpdate'])) {
-    DAL::updateAssetCheckinDetails($_POST, $assetID);
+    if (Asset::isArchived($assetID)) {
+      Form::printDangerMsg("Failed. Asset is Archived. No update can be made.");
+    } else {
+      DAL::updateAssetCheckinDetails($_POST, $assetID);
+    }
   }
 
   if (isset($_POST['transferUpdate'])) {
-    DAL::updateAssetTransferDetails($_POST, $assetID);
+    if (Asset::isArchived($assetID)) {
+      Form::printDangerMsg("Failed. Asset is Archived. No update can be made.");
+    } else {
+      DAL::updateAssetTransferDetails($_POST, $assetID);
+    }
   }
 
   if (isset($_POST['checkoutUpdate'])) {
-    DAL::updateAssetCheckoutDetails($_POST, $assetID);
+    if (Asset::isArchived($assetID)) {
+      Form::printDangerMsg("Failed. Asset is Archived. No update can be made.");
+    } else {
+      DAL::updateAssetCheckoutDetails($_POST, $assetID);
+    }
   }
 ?>
 
@@ -40,7 +56,7 @@
           <label class="col-form-label" for="checkinDate">Date</label>
         </div>
         <div class="col-10">
-          <input class="form-control" type="date" name="checkinDate" value="<?php Asset::getCheckinDate($assetID); ?>" id="">
+          <input class="form-control" type="date" name="checkinDate" value="<?php Asset::getCheckinDate($assetID); ?>" id="" <?php if (Asset::isArchived($assetID)) {echo "disabled";} ?>>
         </div>
       </div>
       <div class="row form-group">
@@ -48,7 +64,7 @@
           <label class="col-form-label" for="checkinLocation">Location</label>
         </div>
         <div class="col-10">
-          <select class="form-control" name="checkinLocation" id="">
+          <select class="form-control" name="checkinLocation" id="" <?php if (Asset::isArchived($assetID)) {echo "disabled";} ?>>
             <?php Form::getCheckinLocationIntoSelect($assetID); ?>
           </select>
         </div>
@@ -58,7 +74,7 @@
           <label class="col-form-label" for="checkinRemarks">Remarks</label>
         </div>
         <div class="col-10">
-          <input class="form-control" type="text" name="checkinRemarks" value="<?php Asset::getCheckinRemarks($assetID); ?>" id="">
+          <input class="form-control" type="text" name="checkinRemarks" value="<?php Asset::getCheckinRemarks($assetID); ?>" id="" <?php if (Asset::isArchived($assetID)) {echo "disabled";} ?>>
         </div>
       </div>
       <div class="float-right">
@@ -74,7 +90,7 @@
           <label class="col-form-label" for="transferDate">Date</label>
         </div>
         <div class="col-10">
-          <input class="form-control" type="date" name="transferDate" value="<?php Asset::getTransferDate($assetID); ?>" id="">
+          <input class="form-control" type="date" name="transferDate" value="<?php Asset::getTransferDate($assetID); ?>" id="" <?php if (Asset::isArchived($assetID)) {echo "disabled";} ?>>
         </div>
       </div>
       <div class="row form-group">
@@ -82,7 +98,7 @@
           <label class="col-form-label" for="transferLocation">Location</label>
         </div>
         <div class="col-10">
-          <select class="form-control" name="transferLocation" id="">
+          <select class="form-control" name="transferLocation" id="" <?php if (Asset::isArchived($assetID)) {echo "disabled";} ?>>
             <?php Form::getTransferLocationIntoSelect($assetID); ?>
           </select>
         </div>
@@ -92,7 +108,7 @@
           <label class="col-form-label" for="transferRemarks">Remarks</label>
         </div>
         <div class="col-10">
-          <input class="form-control" type="text" name="transferRemarks" value="<?php Asset::getTransferRemarks($assetID); ?>" id="">
+          <input class="form-control" type="text" name="transferRemarks" value="<?php Asset::getTransferRemarks($assetID); ?>" id="" <?php if (Asset::isArchived($assetID)) {echo "disabled";} ?>>
         </div>
       </div>
       <div class="float-right">
@@ -111,7 +127,7 @@
           <label class="col-form-label" for="checkoutDate">Date</label>
         </div>
         <div class="col">
-          <input class="form-control" type="date" name="checkoutDate" value="<?php Asset::getCheckoutDate($assetID); ?>" id="">
+          <input class="form-control" type="date" name="checkoutDate" value="<?php Asset::getCheckoutDate($assetID); ?>" id="" <?php if (Asset::isArchived($assetID)) {echo "disabled";} ?>>
         </div>
       </div>
       <div class="row form-group">
@@ -119,7 +135,7 @@
           <label class="col-form-label" for="checkoutLocation">Location</label>
         </div>
         <div class="col-10">
-          <select class="form-control" name="checkoutLocation" id="">
+          <select class="form-control" name="checkoutLocation" id="" <?php if (Asset::isArchived($assetID)) {echo "disabled";} ?>>
             <?php Form::getCheckoutLocationIntoSelect($assetID); ?>
           </select>
         </div>
@@ -129,7 +145,7 @@
           <label class="col-form-label" for="checkoutRemarks">Remarks</label>
         </div>
         <div class="col">
-          <input class="form-control" type="text" name="checkoutRemarks" value="<?php Asset::getCheckoutRemarks($assetID); ?>" id="">
+          <input class="form-control" type="text" name="checkoutRemarks" value="<?php Asset::getCheckoutRemarks($assetID); ?>" id="" <?php if (Asset::isArchived($assetID)) {echo "disabled";} ?>>
         </div>
       </div>
       <div class="row form-group">
