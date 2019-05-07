@@ -37,22 +37,22 @@
 
 <h1>Asset Details</h1>
 <div class="row mb-3">
-  <div class="col">
+  <div class="col-sm">
     <u>Name:</u> <?php Asset::getAssetNameByAssetID($assetID); ?>
   </div>
-  <div class="col">
+  <div class="col-sm">
     <u>Serial:</u> <?php Asset::getAssetSerial($assetID); ?>
   </div>
-  <div class="col">
+  <div class="col-sm">
     <u>Current Location:</u> <?php Asset::getAssetCurrentLocation($assetID); ?>
   </div>
 </div>
 <div class="row">
-  <div class="col">
+  <div class="col-xl-6 col-sm">
     <h5><u>Check-in</u></h5>
     <form action="" method="post">
       <div class="row form-group">
-        <div class="col-2">
+        <div class="col-xl">
           <label class="col-form-label" for="checkinDate">Date</label>
         </div>
         <div class="col-10">
@@ -82,11 +82,11 @@
       </div>
     </form>
   </div>
-  <div class="col">
+  <div class="col-xl-6 col-sm">
     <h5><u>Transfer</u></h5>
     <form action="" method="post">
       <div class="row form-group">
-        <div class="col">
+        <div class="col-xl">
           <label class="col-form-label" for="transferDate">Date</label>
         </div>
         <div class="col-10">
@@ -119,19 +119,19 @@
   </div>
 </div>
 <div class="row">
-  <div class="col-6">
+  <div class="col-xl-6 col-sm">
     <h5><u>Check-out</u></h5>
     <form action="" method="post">
       <div class="row form-group">
-        <div class="col-2">
+        <div class="col-xl">
           <label class="col-form-label" for="checkoutDate">Date</label>
         </div>
-        <div class="col">
+        <div class="col-10">
           <input class="form-control" type="date" name="checkoutDate" value="<?php Asset::getCheckoutDate($assetID); ?>" id="" <?php if (Asset::isArchived($assetID)) {echo "disabled";} ?>>
         </div>
       </div>
       <div class="row form-group">
-        <div class="col-2">
+        <div class="col">
           <label class="col-form-label" for="checkoutLocation">Location</label>
         </div>
         <div class="col-10">
@@ -141,10 +141,10 @@
         </div>
       </div>
       <div class="row form-group">
-        <div class="col-2">
+        <div class="col">
           <label class="col-form-label" for="checkoutRemarks">Remarks</label>
         </div>
-        <div class="col">
+        <div class="col-10">
           <input class="form-control" type="text" name="checkoutRemarks" value="<?php Asset::getCheckoutRemarks($assetID); ?>" id="" <?php if (Asset::isArchived($assetID)) {echo "disabled";} ?>>
         </div>
       </div>
