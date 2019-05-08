@@ -165,14 +165,8 @@ class Form {
     }
   }
 
-  public static function printDangerMsg($msg) {
-    echo "<div class='alert alert-danger' role='alert'>";
-    echo "{$msg}".'<br>';
-    echo "</div>";
-  }
-
-  public static function printWarningMsg($msg) {
-    echo "<div class='alert alert-warning' role='alert'>";
+  public static function printMsg($alertType, $msg) {
+    echo "<div class='alert alert-{$alertType}' role='alert'>";
     echo "{$msg}".'<br>';
     echo "</div>";
   }

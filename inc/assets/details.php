@@ -7,12 +7,12 @@
   }
 
   if (Asset::isArchived($assetID)) {
-    Form::printWarningMsg("Asset is Archived. No update can be made.");
+    Form::printMsg('warning', 'Asset is Archived. No update can be made.');
   }
 
   if (isset($_POST['checkinUpdate'])) {
     if (Asset::isArchived($assetID)) {
-      Form::printDangerMsg("Failed. Asset is Archived. No update can be made.");
+      Form::printMsg('danger', 'Failed. Asset is Archived. No update can be made.');
     } else {
       DAL::updateAssetCheckinDetails($_POST, $assetID);
     }
@@ -20,7 +20,7 @@
 
   if (isset($_POST['transferUpdate'])) {
     if (Asset::isArchived($assetID)) {
-      Form::printDangerMsg("Failed. Asset is Archived. No update can be made.");
+      Form::printMsg('danger', 'Failed. Asset is Archived. No update can be made.');
     } else {
       DAL::updateAssetTransferDetails($_POST, $assetID);
     }
@@ -28,7 +28,7 @@
 
   if (isset($_POST['checkoutUpdate'])) {
     if (Asset::isArchived($assetID)) {
-      Form::printDangerMsg("Failed. Asset is Archived. No update can be made.");
+      Form::printMsg('danger', 'Failed. Asset is Archived. No update can be made.');
     } else {
       DAL::updateAssetCheckoutDetails($_POST, $assetID);
     }
