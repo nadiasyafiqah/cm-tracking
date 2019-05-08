@@ -3,12 +3,12 @@ class Asset {
 
   public static function getCheckinDate($assetID) {
     global $connection;
-    $sql = "SELECT `log`.`logDate`, `log`.`assetID`, `log`.`txnTypeID` ";
-    $sql .= "FROM `log` ";
-    $sql .= "WHERE log.assetID = $assetID AND log.txnTypeID = 1";
+    $sql = "SELECT `assetLog`.`assetLogDate`, `assetLog`.`assetID`, `assetLog`.`txnTypeID` ";
+    $sql .= "FROM `assetLog` ";
+    $sql .= "WHERE assetLog.assetID = $assetID AND assetLog.txnTypeID = 1";
     $sql = mysqli_query($connection, $sql);
     while ($row = mysqli_fetch_assoc($sql)) {
-      $checkinDate = $row['logDate'];
+      $checkinDate = $row['assetLogDate'];
     }
     if (empty($checkinDate)) {
       $checkinDate = '';
@@ -18,10 +18,10 @@ class Asset {
 
   public static function getCheckinRemarks($assetID) {
     global $connection;
-    $sql = "SELECT `log`.`assetID`, `log`.`txnTypeID`, `remarks`.`remarksContent` ";
-    $sql .= "FROM `log` ";
-    $sql .= "LEFT JOIN `remarks` ON `remarks`.`logID` = `log`.`logID` ";
-    $sql .= "WHERE ((`log`.`assetID` = $assetID) AND (`log`.`txnTypeID` = 1))";
+    $sql = "SELECT `assetLog`.`assetID`, `assetLog`.`txnTypeID`, `remarks`.`remarksContent` ";
+    $sql .= "FROM `assetLog` ";
+    $sql .= "LEFT JOIN `remarks` ON `remarks`.`assetLogID` = `assetLog`.`assetLogID` ";
+    $sql .= "WHERE ((`assetLog`.`assetID` = $assetID) AND (`assetLog`.`txnTypeID` = 1))";
     $sql = mysqli_query($connection, $sql);
     while ($row = mysqli_fetch_assoc($sql)) {
       $checkinRemarks = $row['remarksContent'];
@@ -34,12 +34,12 @@ class Asset {
 
   public static function getTransferDate($assetID) {
     global $connection;
-    $sql = "SELECT `log`.`logDate`, `log`.`assetID`, `log`.`txnTypeID` ";
-    $sql .= "FROM `log` ";
-    $sql .= "WHERE log.assetID = $assetID AND log.txnTypeID = 2";
+    $sql = "SELECT `assetLog`.`assetLogDate`, `assetLog`.`assetID`, `assetLog`.`txnTypeID` ";
+    $sql .= "FROM `assetLog` ";
+    $sql .= "WHERE assetLog.assetID = $assetID AND assetLog.txnTypeID = 2";
     $sql = mysqli_query($connection, $sql);
     while ($row = mysqli_fetch_assoc($sql)) {
-      $transferDate = $row['logDate'];
+      $transferDate = $row['assetLogDate'];
     }
     if (empty($transferDate)) {
       $transferDate = '';
@@ -49,10 +49,10 @@ class Asset {
 
   public static function getTransferRemarks($assetID) {
     global $connection;
-    $sql = "SELECT `log`.`assetID`, `log`.`txnTypeID`, `remarks`.`remarksContent` ";
-    $sql .= "FROM `log` ";
-    $sql .= "LEFT JOIN `remarks` ON `remarks`.`logID` = `log`.`logID` ";
-    $sql .= "WHERE ((`log`.`assetID` = $assetID) AND (`log`.`txnTypeID` = 2))";
+    $sql = "SELECT `assetLog`.`assetID`, `assetLog`.`txnTypeID`, `remarks`.`remarksContent` ";
+    $sql .= "FROM `assetLog` ";
+    $sql .= "LEFT JOIN `remarks` ON `remarks`.`assetLogID` = `assetLog`.`assetLogID` ";
+    $sql .= "WHERE ((`assetLog`.`assetID` = $assetID) AND (`assetLog`.`txnTypeID` = 2))";
     $sql = mysqli_query($connection, $sql);
     while ($row = mysqli_fetch_assoc($sql)) {
       $transferRemarks = $row['remarksContent'];
@@ -65,12 +65,12 @@ class Asset {
   
   public static function getCheckoutDate($assetID) {
     global $connection;
-    $sql = "SELECT `log`.`logDate`, `log`.`assetID`, `log`.`txnTypeID` ";
-    $sql .= "FROM `log` ";
-    $sql .= "WHERE log.assetID = $assetID AND log.txnTypeID = 3";
+    $sql = "SELECT `assetLog`.`assetLogDate`, `assetLog`.`assetID`, `assetLog`.`txnTypeID` ";
+    $sql .= "FROM `assetLog` ";
+    $sql .= "WHERE assetLog.assetID = $assetID AND assetLog.txnTypeID = 3";
     $sql = mysqli_query($connection, $sql);
     while ($row = mysqli_fetch_assoc($sql)) {
-      $checkoutDate = $row['logDate'];
+      $checkoutDate = $row['assetLogDate'];
     }
     if (empty($checkoutDate)) {
       $checkoutDate = '';
@@ -80,10 +80,10 @@ class Asset {
 
   public static function getCheckoutRemarks($assetID) {
     global $connection;
-    $sql = "SELECT `log`.`assetID`, `log`.`txnTypeID`, `remarks`.`remarksContent` ";
-    $sql .= "FROM `log` ";
-    $sql .= "LEFT JOIN `remarks` ON `remarks`.`logID` = `log`.`logID` ";
-    $sql .= "WHERE ((`log`.`assetID` = $assetID) AND (`log`.`txnTypeID` = 3))";
+    $sql = "SELECT `assetLog`.`assetID`, `assetLog`.`txnTypeID`, `remarks`.`remarksContent` ";
+    $sql .= "FROM `assetLog` ";
+    $sql .= "LEFT JOIN `remarks` ON `remarks`.`assetLogID` = `assetLog`.`assetLogID` ";
+    $sql .= "WHERE ((`assetLog`.`assetID` = $assetID) AND (`assetLog`.`txnTypeID` = 3))";
     $sql = mysqli_query($connection, $sql);
     while ($row = mysqli_fetch_assoc($sql)) {
       $checkoutRemarks = $row['remarksContent'];
@@ -121,13 +121,13 @@ class Asset {
   public static function getAssetList() {
     global $connection;
     $sql = "SELECT `asset`.`assetID`, `brand`.`brandName`, `model`.`modelName`, `serial`.`serialName`, `location`.`locationName` ";
-    $sql .= "FROM `assetStatus` ";
-    $sql .= "JOIN `asset` ON `asset`.`assetStatusID` = `assetStatus`.`assetStatusID` ";
+    $sql .= "FROM `status` ";
+    $sql .= "JOIN `asset` ON `asset`.`statusID` = `status`.`statusID` ";
     $sql .= "JOIN `brand` ON `asset`.`brandID` = `brand`.`brandID` ";
     $sql .= "JOIN `location` ON `asset`.`locationID` = `location`.`locationID` ";
     $sql .= "JOIN `model` ON `asset`.`modelID` = `model`.`modelID` ";
     $sql .= "JOIN `serial` ON `asset`.`serialID` = `serial`.`serialID` ";
-    $sql .= "WHERE (`assetStatus`.`assetStatusName` = 'Active') ";
+    $sql .= "WHERE (`status`.`statusName` = 'Active') ";
     $sql .= "ORDER BY `brand`.`brandName` ASC, `model`.`modelName` ASC, `serial`.`serialName` ASC ";
     $sql = mysqli_query($connection, $sql);
     $num = 1;
@@ -200,7 +200,7 @@ class Asset {
     $sql .= "LEFT JOIN `asset` ON `asset`.`serialID` = `serial`.`serialID` ";
     $sql .= "LEFT JOIN `brand` ON `asset`.`brandID` = `brand`.`brandID` ";
     $sql .= "LEFT JOIN `model` ON `asset`.`modelID` = `model`.`modelID` ";
-    $sql .= "WHERE `brand`.`brandID` = {$brandID} AND `model`.`modelID` = {$modelID} AND `asset`.`assetStatusID` = 1";
+    $sql .= "WHERE `brand`.`brandID` = {$brandID} AND `model`.`modelID` = {$modelID} AND `asset`.`statusID` = 1";
     $sql = mysqli_query($connection, $sql);
     $num = 1;
     while ($row = mysqli_fetch_assoc($sql)) {
@@ -234,12 +234,12 @@ class Asset {
   public static function getArchivedAssetList() {
     global $connection;
     $sql = "SELECT `asset`.`assetID`, `brand`.`brandName`, `model`.`modelName`, `serial`.`serialName` ";
-    $sql .= "FROM `assetStatus` ";
-    $sql .= "LEFT JOIN `asset` ON `asset`.`assetStatusID` = `assetStatus`.`assetStatusID` ";
+    $sql .= "FROM `status` ";
+    $sql .= "LEFT JOIN `asset` ON `asset`.`statusID` = `status`.`statusID` ";
     $sql .= "LEFT JOIN `brand` ON `asset`.`brandID` = `brand`.`brandID` ";
     $sql .= "LEFT JOIN `model` ON `asset`.`modelID` = `model`.`modelID` ";
     $sql .= "LEFT JOIN `serial` ON `asset`.`serialID` = `serial`.`serialID` ";
-    $sql .= "WHERE (`assetStatus`.`assetStatusID` = 2) "; 
+    $sql .= "WHERE (`status`.`statusID` = 2) "; 
     $sql .= "ORDER BY `brand`.`brandName` ASC, `model`.`modelName` ASC, `serial`.`serialName` ASC";
     $sql = mysqli_query($connection, $sql);
     $num = 1;
@@ -259,13 +259,13 @@ class Asset {
 
   public static function isArchived($assetID) {
     global $connection;
-    $sql = "SELECT `asset`.`assetID`, `assetStatus`.`assetStatusName` ";
+    $sql = "SELECT `asset`.`assetID`, `status`.`statusName` ";
     $sql .= "FROM `asset` ";
-    $sql .= "LEFT JOIN `assetStatus` ON `asset`.`assetStatusID` = `assetStatus`.`assetStatusID` ";
+    $sql .= "LEFT JOIN `status` ON `asset`.`statusID` = `status`.`statusID` ";
     $sql .= "WHERE (`asset`.`assetID` = {$assetID})";
     $sql = mysqli_query($connection, $sql);
     while ($row = mysqli_fetch_assoc($sql)) {
-      $assetStatus = $row['assetStatusName'];
+      $assetStatus = $row['statusName'];
     }
     if ($assetStatus == 'Archived') {
       return true;
@@ -282,10 +282,10 @@ class Asset {
 
   public static function searchAssetBySerial($searchString) {
     global $connection;
-    $sql = "SELECT `asset`.`assetID`, `assetStatus`.`assetStatusName`, `serial`.`serialName`, `brand`.`brandName`, `model`.`modelName` ";
+    $sql = "SELECT `asset`.`assetID`, `status`.`statusName`, `serial`.`serialName`, `brand`.`brandName`, `model`.`modelName` ";
     $sql .= "FROM `serial` ";
     $sql .= "LEFT JOIN `asset` ON `asset`.`serialID` = `serial`.`serialID` ";
-    $sql .= "LEFT JOIN `assetStatus` ON `asset`.`assetStatusID` = `assetStatus`.`assetStatusID` ";
+    $sql .= "LEFT JOIN `status` ON `asset`.`statusID` = `status`.`statusID` ";
     $sql .= "LEFT JOIN `brand` ON `asset`.`brandID` = `brand`.`brandID` ";
     $sql .= "LEFT JOIN `model` ON `asset`.`modelID` = `model`.`modelID` ";
     $sql .= "WHERE `serial`.`serialName` LIKE '%{$searchString}%'";

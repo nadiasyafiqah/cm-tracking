@@ -2,10 +2,10 @@
 class Form {
   public static function getCheckoutLocationIntoSelect($assetID) {
     global $connection;
-    $sql1 = "SELECT `log`.`assetID`, `log`.`txnTypeID`, `location`.`locationName`, `location`.`locationID` ";
-    $sql1 .= "FROM `log` ";
-    $sql1 .= "JOIN `location` ON `log`.`locationID` = `location`.`locationID` ";
-    $sql1 .= "WHERE ((`log`.`assetID` = $assetID) AND (`log`.`txnTypeID` = 3))";
+    $sql1 = "SELECT `assetLog`.`assetID`, `assetLog`.`txnTypeID`, `location`.`locationName`, `location`.`locationID` ";
+    $sql1 .= "FROM `assetLog` ";
+    $sql1 .= "JOIN `location` ON `assetLog`.`locationID` = `location`.`locationID` ";
+    $sql1 .= "WHERE ((`assetLog`.`assetID` = $assetID) AND (`assetLog`.`txnTypeID` = 3))";
     $sql1 = mysqli_query($connection, $sql1);
     while ($row = mysqli_fetch_assoc($sql1)) {
       echo $assetLocationID = $row['locationID'];
@@ -43,10 +43,10 @@ class Form {
 
   public static function getCheckinLocationIntoSelect($assetID) {
     global $connection;
-    $sql1 = "SELECT `log`.`assetID`, `log`.`txnTypeID`, `location`.`locationName`, `location`.`locationID` ";
-    $sql1 .= "FROM `log` ";
-    $sql1 .= "LEFT JOIN `location` ON `log`.`locationID` = `location`.`locationID` ";
-    $sql1 .= "WHERE ((`log`.`assetID` = $assetID) AND (`log`.`txnTypeID` = 1))";
+    $sql1 = "SELECT `assetLog`.`assetID`, `assetLog`.`txnTypeID`, `location`.`locationName`, `location`.`locationID` ";
+    $sql1 .= "FROM `assetLog` ";
+    $sql1 .= "LEFT JOIN `location` ON `assetLog`.`locationID` = `location`.`locationID` ";
+    $sql1 .= "WHERE ((`assetLog`.`assetID` = $assetID) AND (`assetLog`.`txnTypeID` = 1))";
     $sql1 = mysqli_query($connection, $sql1);
     while ($row = mysqli_fetch_assoc($sql1)) {
       $assetLocationID = $row['locationID'];
@@ -85,10 +85,10 @@ class Form {
 
   public static function getTransferLocationIntoSelect($assetID) {
     global $connection;
-    $sql1 = "SELECT `log`.`assetID`, `log`.`txnTypeID`, `location`.`locationName`, `location`.`locationID` ";
-    $sql1 .= "FROM `log` ";
-    $sql1 .= "LEFT JOIN `location` ON `log`.`locationID` = `location`.`locationID` ";
-    $sql1 .= "WHERE ((`log`.`assetID` = $assetID) AND (`log`.`txnTypeID` = 2))";
+    $sql1 = "SELECT `assetLog`.`assetID`, `assetLog`.`txnTypeID`, `location`.`locationName`, `location`.`locationID` ";
+    $sql1 .= "FROM `assetLog` ";
+    $sql1 .= "LEFT JOIN `location` ON `assetLog`.`locationID` = `location`.`locationID` ";
+    $sql1 .= "WHERE ((`assetLog`.`assetID` = $assetID) AND (`assetLog`.`txnTypeID` = 2))";
     $sql1 = mysqli_query($connection, $sql1);
     while ($row = mysqli_fetch_assoc($sql1)) {
       $assetLocationID = $row['locationID'];
