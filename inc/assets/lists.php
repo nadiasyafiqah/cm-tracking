@@ -9,6 +9,6 @@
     </tr>
   </thead>
   <tbody>
-    <?php Asset::getDistinctAssetBrandAndModel(); ?>
+    <?php Asset::getActiveAssetBrandAndModel(); ?>
   </tbody>
 </table>

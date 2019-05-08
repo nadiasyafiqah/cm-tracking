@@ -94,12 +94,13 @@ class Asset {
     echo $checkoutRemarks;
   }
 
-  public static function getDistinctAssetBrandAndModel() {
+  public static function getActiveAssetBrandAndModel() {
     global $connection;
-    $sql = "SELECT DISTINCT `asset`.`brandID`, `asset`.`modelID`, `brand`.`brandName`, `model`.`modelName` ";
-    $sql .= "FROM `brand` ";
-    $sql .= "LEFT JOIN `asset` ON `asset`.`brandID` = `brand`.`brandID` ";
-    $sql .= "LEFT JOIN `model` ON `asset`.`modelID` = `model`.`modelID`";
+    $sql = "SELECT `brand`.`brandID`, `brand`.`brandName`, `model`.`modelID`, `model`.`modelName` ";
+    $sql .= "FROM `asset` ";
+    $sql .= "LEFT JOIN `brand` ON `asset`.`brandID` = `brand`.`brandID` ";
+    $sql .= "LEFT JOIN `model` ON `asset`.`modelID` = `model`.`modelID` ";
+    $sql .= "WHERE (`asset`.`statusID` = 1)";
     $sql = mysqli_query($connection, $sql);
     $num = 1;
     while ($row = mysqli_fetch_assoc($sql)) {
