@@ -1,7 +1,7 @@
 <?php
 define("INC_DIR", __DIR__.'/inc');
 define("ASSETS_INC", INC_DIR.'/assets');
-include_once(INC_DIR.'/functions.php');
+define("CLASS_DIR",__DIR__.'/class');
 
 //database setting
 $dbhost = 'localhost';

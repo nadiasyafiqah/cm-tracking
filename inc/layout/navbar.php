@@ -12,8 +12,9 @@
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" >Asset</a>
             <div class="dropdown-menu">
-              <a class="dropdown-item" href="assets.php?add">Add Asset</a>
+              <a class="dropdown-item" href="assets.php?action=add">Add Asset</a>
               <a class="dropdown-item" href="assets.php">Assets List</a>
+              <a class="dropdown-item" href="assets.php?action=archived">Archived List</a>
             </div>
           </li>
           <li class="nav-item dropdown">
@@ -24,8 +25,8 @@
             </div>
           </li>
         </ul>
-        <form class="form-inline my-2 my-lg-0" action="search.php">
-          <input class="form-control mr-sm-2" type="text" placeholder="Search Serial" aria-label="Search">
+        <form class="form-inline my-2 my-lg-0" method="post" action="search.php">
+          <input class="form-control mr-sm-2" type="text" placeholder="Search Serial" name="search">
         </form>
         <div>
         <i class="fa fa-user fa-lg" aria-hidden="true"></i>
