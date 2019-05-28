@@ -101,13 +101,15 @@ class DAL {
     }
 
     $assetLogID = mysqli_insert_id($connection); //get assetLogID
-    $sql4 = "INSERT INTO `remarks`(`assetLogID`, `remarksContent`) VALUES ('{$assetLogID}', '{$remarksContent}')";
+    $sql4 = "INSERT INTO `remarks`(`remarksContent`) VALUES ('{$remarksContent}')";
     $sql4 = mysqli_query($connection, $sql4);
     if (!$sql4) {
       DAL::Error();
     }
 
-    if ($sql1 && $sql2 && $sql3 && $sql4) {
+    $remarksID = mysqli_insert_id($connection); //get remarksID
+    $sql5 = "INSERT INTO `assetLog_has_remarks`(`assetLogID`, `remarksID`) VALUES ('{$assetLogID}', '{$remarksID}')";
+    if ($sql1 && $sql2 && $sql3 && $sql4 && $sql5) {
       mysqli_commit($connection);
     } else {
       mysqli_rollback($connection);
