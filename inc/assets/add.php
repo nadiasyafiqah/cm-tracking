@@ -14,9 +14,9 @@ if (isset($_POST['submit'])) {
 <h2>Add New Asset</h2>
 <form action="" method="post">
   <div class="form-group row">
-    <label for="logDate" class="col-sm-2 col-form-label">Date</label>
+    <label for="assetLogDate" class="col-sm-2 col-form-label">Date</label>
     <div class="col-sm-6">
-      <input class="form-control" type="date" name="logDate" id="">
+      <input class="form-control" type="date" name="assetLogDate" id="">
     </div>
   </div>
   <div class="form-group row">
