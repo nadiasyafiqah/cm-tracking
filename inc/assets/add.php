@@ -3,11 +3,7 @@ include(CLASS_DIR.'/class.form.php');
 include(CLASS_DIR.'/class.dal.php');
 
 if (isset($_POST['submit'])) {
-  if (empty($_POST['remarksContent'])) {
-    DAL::addAssetWithoutRemarks($_POST);
-  } else {
-    DAL::addAssetWithRemarks($_POST);
-  }
+    DAL::addAsset($_POST);
 }
 ?>
 
@@ -23,7 +19,7 @@ if (isset($_POST['submit'])) {
     <label for="brandID" class="col-sm-2 col-form-label">Brand</label>
     <div class="col-sm-6">
       <select class="form-control" name="brandID" id="">
-        <?php Form::getBrandListIntoSelect(); ?>
+        <?php Form::getBrandListIntoSelect(1); //brand's scopeID as parameter ?>
       </select>
     </div>
   </div>
@@ -31,7 +27,7 @@ if (isset($_POST['submit'])) {
     <label for="modelID" class="col-sm-2 col-form-label">Model</label>
     <div class="col-sm-6">
     <select class="form-control" name="modelID" id="">
-      <?php Form::getModelListIntoSelect(); ?>
+      <?php Form::getModelListIntoSelect(1); //brand's scopeID as parameter?>
     </select>
     </div>
   </div>
