@@ -18,10 +18,13 @@ class Asset {
 
   public static function getCheckinRemarks($assetID) {
     global $connection;
-    $sql = "SELECT `assetLog`.`assetID`, `assetLog`.`txnTypeID`, `remarks`.`remarksContent` ";
+    $sql = "SELECT `assetLog`.`assetLogID`, `asset`.`assetID`, `assetLog`.`txnTypeID`, `remarks`.`remarksContent` ";
     $sql .= "FROM `assetLog` ";
-    $sql .= "LEFT JOIN `remarks` ON `remarks`.`assetLogID` = `assetLog`.`assetLogID` ";
-    $sql .= "WHERE ((`assetLog`.`assetID` = $assetID) AND (`assetLog`.`txnTypeID` = 1))";
+    $sql .= "LEFT JOIN `asset` ON `assetLog`.`assetID` = `asset`.`assetID` ";
+    $sql .= "LEFT JOIN `assetLog_has_remarks` ON `assetLog_has_remarks`.`assetLogID` = `assetLog`.`assetLogID` ";
+    $sql .= "LEFT JOIN `remarks` ON `assetLog_has_remarks`.`remarksID` = `remarks`.`remarksID` ";
+    $sql .= "WHERE (`assetLog`.`txnTypeID` = 1) ";
+    $sql .= "AND   (`asset`.`assetID` = $assetID)";
     $sql = mysqli_query($connection, $sql);
     while ($row = mysqli_fetch_assoc($sql)) {
       $checkinRemarks = $row['remarksContent'];
@@ -49,10 +52,13 @@ class Asset {
 
   public static function getTransferRemarks($assetID) {
     global $connection;
-    $sql = "SELECT `assetLog`.`assetID`, `assetLog`.`txnTypeID`, `remarks`.`remarksContent` ";
+    $sql = "SELECT `assetLog`.`assetLogID`, `asset`.`assetID`, `assetLog`.`txnTypeID`, `remarks`.`remarksContent` ";
     $sql .= "FROM `assetLog` ";
-    $sql .= "LEFT JOIN `remarks` ON `remarks`.`assetLogID` = `assetLog`.`assetLogID` ";
-    $sql .= "WHERE ((`assetLog`.`assetID` = $assetID) AND (`assetLog`.`txnTypeID` = 2))";
+    $sql .= "LEFT JOIN `asset` ON `assetLog`.`assetID` = `asset`.`assetID` ";
+    $sql .= "LEFT JOIN `assetLog_has_remarks` ON `assetLog_has_remarks`.`assetLogID` = `assetLog`.`assetLogID` ";
+    $sql .= "LEFT JOIN `remarks` ON `assetLog_has_remarks`.`remarksID` = `remarks`.`remarksID` ";
+    $sql .= "WHERE (`assetLog`.`txnTypeID` = 2) ";
+    $sql .= "AND   (`asset`.`assetID` = $assetID)";
     $sql = mysqli_query($connection, $sql);
     while ($row = mysqli_fetch_assoc($sql)) {
       $transferRemarks = $row['remarksContent'];
@@ -80,10 +86,13 @@ class Asset {
 
   public static function getCheckoutRemarks($assetID) {
     global $connection;
-    $sql = "SELECT `assetLog`.`assetID`, `assetLog`.`txnTypeID`, `remarks`.`remarksContent` ";
+    $sql = "SELECT `assetLog`.`assetLogID`, `asset`.`assetID`, `assetLog`.`txnTypeID`, `remarks`.`remarksContent` ";
     $sql .= "FROM `assetLog` ";
-    $sql .= "LEFT JOIN `remarks` ON `remarks`.`assetLogID` = `assetLog`.`assetLogID` ";
-    $sql .= "WHERE ((`assetLog`.`assetID` = $assetID) AND (`assetLog`.`txnTypeID` = 3))";
+    $sql .= "LEFT JOIN `asset` ON `assetLog`.`assetID` = `asset`.`assetID` ";
+    $sql .= "LEFT JOIN `assetLog_has_remarks` ON `assetLog_has_remarks`.`assetLogID` = `assetLog`.`assetLogID` ";
+    $sql .= "LEFT JOIN `remarks` ON `assetLog_has_remarks`.`remarksID` = `remarks`.`remarksID` ";
+    $sql .= "WHERE (`assetLog`.`txnTypeID` = 3) ";
+    $sql .= "AND   (`asset`.`assetID` = $assetID)";
     $sql = mysqli_query($connection, $sql);
     while ($row = mysqli_fetch_assoc($sql)) {
       $checkoutRemarks = $row['remarksContent'];
