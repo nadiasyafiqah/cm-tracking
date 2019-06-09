@@ -124,10 +124,11 @@ class Form {
     }  
   }
 
-  public static function getBrandListIntoSelect() {
+  public static function getBrandListIntoSelect($scope) {
     global $connection;
     $sql = "SELECT `brand`.`brandID`, `brand`.`brandName` ";
-    $sql .= "FROM `brand`";
+    $sql .= "FROM `brand` ";
+    $sql .= "WHERE `scopeID` = {$scope} ";
     $sql .= "ORDER by `brand`.`brandName` ASC";
     $sql = mysqli_query($connection, $sql);
     while ($row = mysqli_fetch_assoc($sql)) {
@@ -137,10 +138,11 @@ class Form {
     }
   }
 
-  public static function getModelListIntoSelect() {
+  public static function getModelListIntoSelect($scope) {
     global $connection;
     $sql = "SELECT `model`.`modelID`, `model`.`modelName` ";
     $sql .= "FROM `model` ";
+    $sql .= "WHERE `scopeID` = {$scope} ";
     $sql .= "ORDER BY `model`.`modelName` ASC";
     $sql = mysqli_query($connection, $sql);
     while ($row = mysqli_fetch_assoc($sql)) {
