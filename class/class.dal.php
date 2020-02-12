@@ -111,6 +111,105 @@ class DAL {
     }
   
   }
+    
+    
+public static function addParts($request) {
+    global $connection;
+    $sparepartID = $request['sparePartID'];
+    $brandID = $request['brandID'];
+    $modelID = $request['modelID'];
+    $serialName = $request['serialID'];
+    $sparePartTypeID = $request['sparePartTypeID'];
+    $statusID = $request['statusID'];
+    $sparePartLogDate = $request['sparePartLogDate'];
+
+    $requiredField = array("Date"=>"$sparePartLogDate", "Brand"=>"$brandID", "Model"=>"$modelID", "Serial"=>"$serialName", "location"=>"$locationID");
+    foreach ($requiredField as $field => $value) {
+      if ($value == '') {    
+        echo "<div class='alert alert-warning' role='alert'>";
+        echo "{$field} is empty.<br>";
+        echo "</div>";
+      }
+    }
+
+    if (empty($remarksContent)) {
+      mysqli_begin_transaction($connection);
+      $sql1 = "INSERT INTO `serial`(`serialName`) VALUES ('{$serialName}')";
+      $sql1 = mysqli_query($connection, $sql1);
+      if (!$sql1) {
+        $error = DAL::ErrorNo();
+        if ($error = 1062) {
+          echo "<div class='alert alert-warning' role='alert'>";
+          echo "Serial already exist<br>";
+          echo "</div>";
+        }
+      }
+      $serialID = mysqli_insert_id($connection); //get serialID
+
+      $sql2 = "INSERT INTO `sparepart`(`sparePartID`,`brandID`, `modelID`, `locationID`, `seriallID`, `sparePartTypeID`, `statusID`) ";
+      $sql2 .= "VALUES ('{$brandID}', '{$modelID}', '{$locationID}', '{$serialID}', 1)";
+      $sql2 = mysqli_query($connection, $sql2);
+      if (!$sql2) {
+        echo DAL::ErrorNo();
+      }
+      $assetID = mysqli_insert_id($connection); //get assetID
+
+      $sql3 = "INSERT INTO `sparepartLog`(`sparePartLogDate`, `locationID`, `sparePartID`, `txnTypeID`, `userID`) ";
+      $sql3.= "VALUES ('{$sparePartLogDate}', '{$locationID}', '{$sparePartID}', 1, 1)";
+      $sql3 = mysqli_query($connection, $sql3);
+      if (!$sql3) {
+        echo DAL::ErrorNo();
+      }
+
+      if ($sql1 && $sql2 && $sql3) {
+        mysqli_commit($connection);
+      } else {
+        mysqli_rollback($connection);
+      }
+    } else {
+      mysqli_begin_transaction($connection);
+      $sql1 = "INSERT INTO `serial`(`serialName`) VALUES ('{$serialName}')";
+      $sql1 = mysqli_query($connection, $sql1);
+      if (!$sql1) {
+        echo DAL::ErrorNo();
+      }
+      $serialID = mysqli_insert_id($connection); //get serialID
+
+      $sql2 = "INSERT INTO `sparepart`(`brandID`, `modelID`, `locationID`, `serialID`, `statusID`) ";
+      $sql2 .= "VALUES ('{$brandID}', '{$modelID}', '{$locationID}', '{$serialID}', 1)";
+      $sql2 = mysqli_query($connection, $sql2);
+      if (!$sql2) {
+        DAL::Error();
+      }
+      $assetID = mysqli_insert_id($connection); //get assetID
+
+      $sql3 = "INSERT INTO `sparepartLog`(`sparePartLogDate`, `locationID`, `assetID`, `txnTypeID`, `userID`) ";
+      $sql3.= "VALUES ('{$sparePartLogDate}', '{$locationID}', '{$assetID}', 1, 1)";
+      $sql3 = mysqli_query($connection, $sql3);
+      if (!$sql3) {
+        DAL::Error();
+      }
+      $assetLogID = mysqli_insert_id($connection); //get assetLogID
+
+      $sql4 = "INSERT INTO `remarks`(`remarksContent`) VALUES ('{$remarksContent}')";
+      $sql4 = mysqli_query($connection, $sql4);
+      if (!$sql4) {
+        DAL::Error();
+      }
+      $remarksID = mysqli_insert_id($connection); //get remarksID
+
+      $sql5 = "INSERT INTO `sparePartLog_has_remarks`(`sparePartLogID`, `remarksID`) VALUES ('{$sparePartLogID}', '{$remarksID}')";
+      $sql5 = mysqli_query($connection, $sql5);
+      if ($sql1 && $sql2 && $sql3 && $sql4 && $sql5) {
+        mysqli_commit($connection);
+      }
+        
+        else {
+        mysqli_rollback($connection);
+      }
+    }
+  
+  }
 
   public static function updateAssetCheckoutDetails($request, $assetID) {
     global $connection;

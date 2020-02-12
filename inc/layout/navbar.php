@@ -20,7 +20,7 @@
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" >Spare Parts</a>
             <div class="dropdown-menu">
-              <a class="dropdown-item" href="">Add Spareparts</a>
+              <a class="dropdown-item" href="parts.php?action=add">Add Spareparts</a>
               <a class="dropdown-item" href="">Spareparts List</a>
             </div>
           </li>

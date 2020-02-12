@@ -2,6 +2,7 @@
 define("INC_DIR", __DIR__.'/inc');
 define("ASSETS_INC", INC_DIR.'/assets');
 define("CLASS_DIR",__DIR__.'/class');
+define("PARTS_INC", INC_DIR.'/parts');
 
 //database setting
 $dbhost = 'localhost';
