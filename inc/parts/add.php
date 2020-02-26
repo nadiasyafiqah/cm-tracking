@@ -24,7 +24,7 @@ if (isset($_POST['submit'])) {
       <input class="form-control" type="date" name="sparePartLogDate" id="">
     </div>
   </div>
-    
+  
   <div class="form-group row">
     <label for="brandID" class="col-sm-2 col-form-label">Parts Brand</label>
     <div class="col-sm-6">
@@ -42,7 +42,7 @@ if (isset($_POST['submit'])) {
     </div>
   </div>
   <div class="form-group row">
-    <label for="serialID" class="col-sm-2 col-form-label">Part Serial</label>
+    <label for="serialID" class="col-sm-2 col-form-label">Part Serial</label><br>
     <div class="col-sm-6">
       <input class="form-control" type="text" name="serialID" id="">
     </div>
